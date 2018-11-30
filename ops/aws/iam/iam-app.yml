@@ -1,0 +1,94 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  Hands-on IAM User
+Parameters:
+  Group:
+    NoEcho: 'true'
+    Type: String
+    Description: New account user group
+  User:
+    NoEcho: 'true'
+    Type: String
+    Description: New account user
+  Password:
+    NoEcho: 'true'
+    Type: String
+    Description: New account password
+    MinLength: '1'
+    MaxLength: '41'
+    ConstraintDescription: the password must be between 1 and 41 characters
+Resources:
+  APPUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      UserName: !Join [ "@", [ !Ref User, !Ref "AWS::Region" ] ]
+      LoginProfile:
+        Password: !Ref Password
+  APPUserGroup:
+    Type: 'AWS::IAM::Group'
+    Properties:
+      GroupName: !Join [ "@", [ !Ref Group, !Ref "AWS::Region" ] ]
+  Users:
+    Type: 'AWS::IAM::UserToGroupAddition'
+    Properties:
+      GroupName: !Ref APPUserGroup
+      Users:
+        - !Ref APPUser
+  APPUserPolicies:
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyName: APPUsers
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Action:
+            - 's3:getObject'
+            - 's3:PutObject'
+            - 'cloudformation:Describe*'
+            - 'cloudformation:EstimateTemplateCost'
+            - 'cloudformation:Get*'
+            - 'cloudformation:List*'
+            - 'cloudformation:ValidateTemplate'
+            - 'cloudformation:CreateChangeSet'
+            - 'cloudformation:ExecuteChangeSet'
+            - 'iam:CreateRole'
+            - 'iam:DeleteRole'
+            - 'iam:AttachRolePolicy'
+            - 'iam:DetachRolePolicy'
+            - 'iam:GetRole'
+            - 'iam:PassRole'
+            - 'iam:ListPolicies'
+            - 'lambda:CreateFunction'
+            - 'lambda:DeleteFunction'
+            - 'lambda:GetFunctionConfiguration'
+            - 'lambda:AddPermission'
+            - 'lambda:RemovePermission'
+            - 'lambda:ListTags'
+            - 'lambda:TagResource'
+            - 'lambda:UntagResource'
+            - 'lambda:UpdateAlias'
+            - 'lambda:UpdateFunctionCode'
+            - 'lambda:UpdateFunctionConfiguration'
+            - 'lambda:UpdateEventSourceMapping'
+            - 'apigateway:POST'
+            - 'apigateway:PATCH'
+            - 'apigateway:DELETE'
+            - 'apigateway:GET'
+            - 'apigateway:PUT'
+            - 'ec2:DescribeRegions'
+            Resource: '*'
+      Groups:
+        - !Ref APPUserGroup
+  APPKeys:
+    Type: 'AWS::IAM::AccessKey'
+    Properties:
+      UserName: !Ref APPUser
+Outputs:
+  AccessKey:
+    Value: !Ref APPKeys
+    Description: AWSAccessKeyId of new user
+  SecretKey:
+    Value: !GetAtt
+      - APPKeys
+      - SecretAccessKey
+    Description: AWSSecretKey of new user

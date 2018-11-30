@@ -1,0 +1,14 @@
+[
+  {
+    "ParameterKey": "Group",
+    "ParameterValue": "HandsOn"
+  },
+  {
+    "ParameterKey": "User",
+    "ParameterValue": "HandsOn"
+  },
+  {
+    "ParameterKey": "Password",
+    "ParameterValue": "miPassw0rd"
+  }
+]

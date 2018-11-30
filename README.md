@@ -90,6 +90,25 @@ gradle livereload
 
 [http://192.168.33.10:35729/](http://192.168.33.10:35729/)に接続して確認する
 
+### AWS 認証のセットアップ
+
+```bash
+cd /vagrant/sam-app
+cat <<EOF > .env
+#!/usr/bin/env bash
+export AWS_ACCESS_KEY_ID=xxxxxxxxxxxx
+export AWS_SECRET_ACCESS_KEY=xxxxxxxxxx
+export AWS_DEFAULT_REGION=us-east-1
+EOF
+```
+
+アクセスキーを設定したら以下の操作をする
+
+```bash
+source .env
+aws ec2 describe-regions
+```
+
 **[⬆ back to top](#構成)**
 
 ## 配置
