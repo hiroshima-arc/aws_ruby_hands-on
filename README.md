@@ -147,6 +147,20 @@ aws cloudformation describe-stacks --stack-name ruby-hands-on-development --quer
 
 ## 運用
 
+### スタックの削除
+
+```bash
+aws cloudformation delete-stack --stack-name ruby-handson-development
+aws cloudformation delete-stack --stack-name ruby-handson-production
+aws cloudformation delete-stack --stack-name ruby-handson-pipline
+```
+
+### S ３バケットの削除
+
+```bash
+aws s3 rb s3://ruby-handson --force
+```
+
 **[⬆ back to top](#構成)**
 
 ## 開発
