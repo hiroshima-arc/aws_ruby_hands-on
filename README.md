@@ -77,9 +77,24 @@ cd sam-app
 ### ローカルでテスト
 
 ```bash
+cd /vagrant
+bundle init
+```
+
+`Gemfile`
+
+```
+group :development, :test do
+  gem 'mocha'
+end
+```
+
+```bash
+cd /vagrant/
+bundle install
+ruby tests/unit/test_handler.rb
 cd /vagrant/sam-app
 bundle install
-ruby tests/unit/test_hello.rb
 bundle install --deployment --path hello_world/vendor/bundle
 mkdir tests/hello_world
 sam local generate-event apigateway aws-proxy > tests/hello_world/event_file.json
@@ -88,6 +103,32 @@ sam local start-api --host 0.0.0.0
 ```
 
 [http://192.168.33.10:3000/hello](http://192.168.33.10:3000/hello)に接続して確認する
+
+### コードカバレッジのセットアップ
+
+`Gemfile`
+
+```
+group :development, :test do
+  gem 'mocha'
+  gem "simplecov"
+end
+```
+
+`/vagrant/samp-app/tests/unit/test_handler`
+
+```
+・・・
+require 'simplecov'
+SimpleCov.start
+・・・
+```
+
+```bash
+cd /vagrant/sam-app
+bundle install
+ruby tests/unit/test_handler.rb
+```
 
 **[⬆ back to top](#構成)**
 
