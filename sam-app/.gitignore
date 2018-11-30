@@ -246,3 +246,4 @@ $RECYCLE.BIN/
 vendor
 .bundle
 coverage
+packaged.yaml
