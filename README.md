@@ -202,6 +202,12 @@ aws cloudformation delete-stack --stack-name ruby-handson-pipline
 aws s3 rb s3://ruby-handson --force
 ```
 
+### タスク
+
+```bash
+rake -T
+```
+
 **[⬆ back to top](#構成)**
 
 ## 開発
@@ -285,8 +291,8 @@ end
 ```bash
 cd /vagrant
 bundle install
-bundle exec rubocop -a sam-app/hello_world/app.rb
-bundle exec rubocop -a sam-app/tests/unit/test_handler.rb
+rubocop -a sam-app/hello_world/app.rb
+rubocop -a sam-app/tests/unit/test_handler.rb
 ```
 
 **[⬆ back to top](#構成)**

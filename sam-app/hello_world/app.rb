@@ -78,8 +78,8 @@ def lambda_handler(event:, context:)
   {
     statusCode: response.code,
     headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
     },
     body: {
       message: 'Hello Ruby lambda world!',
