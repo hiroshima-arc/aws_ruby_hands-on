@@ -54,6 +54,42 @@ rbenv global $RUBY_VER
 gem install bundler rake
 ```
 
+### ドキュメント環境のセットアップ
+
+```bash
+cd /vagrant
+curl -s api.sdkman.io | bash
+source "/home/vagrant/.sdkman/bin/sdkman-init.sh"
+sdk list maven
+sdk use maven 3.5.4
+sdk list java
+sdk use java 8.0.192-zulu
+sdk list gradle
+sdk use gradle 4.9
+```
+
+ドキュメントのセットアップ
+
+```
+cd /vagrant/
+touch build.gradle
+```
+
+`build.gradle`を作成して以下のコマンドを実行
+
+```
+gradle build
+```
+
+ドキュメントの生成
+
+```bash
+gradle asciidoctor
+gradle livereload
+```
+
+[http://192.168.33.10:35729/](http://192.168.33.10:35729/)に接続して確認する
+
 **[⬆ back to top](#構成)**
 
 ## 配置

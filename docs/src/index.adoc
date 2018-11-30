@@ -1,0 +1,28 @@
+:toc: left
+:toclevels: 5
+:sectnums:
+
+= AWS サーバーレスアプリケーションモデル (AWS SAM) ハンズオン(Ruby)
+
+== 目的
+
+開発ドキュメントの管理
+
+== 前提
+
+|===
+|ソフトウェア |バージョン |備考
+|ruby       |2.5.3     |
+|===
+
+== 構成
+
+* <<anchor-1,HelloWorld>>
+
+== 詳細
+
+=== link:./spec/hello_world.html[HelloWorld][[anchor-1]]
+== 参照
+* http://asciidoctor.org/[Asciidoctor]
+* http://www.plantuml.com[PlantUML]
+* https://about.draw.io/[draw.io]
