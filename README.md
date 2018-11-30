@@ -157,9 +157,30 @@ git config --add secrets.allowed sam-app/tests/hello_world/event_file.json
 git config --add secrets.allowed sam-app/tests/unit/test_handler.rb
 ```
 
+### Code Buildローカルのセットアップ
+
+```bash
+cd /vagrant/ops/aws
+mkdir code_build
+cd code_build
+git clone https://github.com/aws/aws-codebuild-docker-images.git
+cd aws-codebuild-docker-images
+cd ubuntu/ruby/2.5.1
+docker build -t aws/codebuild/ruby:2.5.1 .
+docker run -it --entrypoint sh aws/codebuild/ruby:2.5.1 -c bash
+exit
+```
+
 **[⬆ back to top](#構成)**
 
 ## 配置
+
+### アプリケーションのローカルビルド
+
+```bash
+cd /vagrant/
+./ops/aws/code_build/aws-codebuild-docker-images/local_builds/codebuild_build.sh -i aws/codebuild/ruby:2.5.1 -a ops/aws/code_build/artifact
+```
 
 ### アプリケーションのデプロイ
 
@@ -304,3 +325,4 @@ rubocop -a dev/sam-app/tests/unit/test_handler.rb
 - [Groom your app’s Ruby environment with rbenv.](https://github.com/rbenv/rbenv)
 - [SimpleCov](https://github.com/colszowka/simplecov)
 - [RuboCop](https://github.com/rubocop-hq/rubocop)
+- [AWS CodeBuild curated Docker images](https://github.com/aws/aws-codebuild-docker-images)

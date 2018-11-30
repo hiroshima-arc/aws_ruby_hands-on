@@ -16,14 +16,15 @@ This is a sample template for sam-app - Below is a brief explanation of what we 
 
 ## Requirements
 
-* AWS CLI already configured with at least PowerUser permission
-* [Ruby](https://www.ruby-lang.org/en/documentation/installation/) 2.5 installed
-* [Docker installed](https://www.docker.com/community-edition)
-* [Ruby Version Manager](http://rvm.io/)
+- AWS CLI already configured with at least PowerUser permission
+- [Ruby](https://www.ruby-lang.org/en/documentation/installation/) 2.5 installed
+- [Docker installed](https://www.docker.com/community-edition)
+- [Ruby Version Manager](http://rvm.io/)
 
 ## Setup process
 
 ### Match ruby version with docker image
+
 For high fidelity development environment, make sure the local ruby version matches that of the docker image. To do so lets use [Ruby Version Manager](http://rvm.io/)
 
 Setup Ruby Version Manager from [Ruby Version Manager](http://rvm.io/)
@@ -36,10 +37,9 @@ rvm use ruby-2.5.0
 rvm --default use 2.5.0
 ```
 
-
 ### Installing dependencies
 
-```sam-app``` comes with a Gemfile that defines the requirements and manages installing them.
+`sam-app` comes with a Gemfile that defines the requirements and manages installing them.
 
 ```bash
 gem install bundler
@@ -47,9 +47,9 @@ bundle install
 bundle install --deployment --path hello_world/vendor/bundle
 ```
 
-* Step 1 installs ```bundler```which provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed.
-* Step 2 creates a Gemfile.lock that locks down the versions and creates the full dependency closure.
-* Step 3 installs the gems to ```hello_world/vendor/bundle```.
+- Step 1 installs `bundler`which provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed.
+- Step 2 creates a Gemfile.lock that locks down the versions and creates the full dependency closure.
+- Step 3 installs the gems to `hello_world/vendor/bundle`.
 
 **NOTE:** As you change your dependencies during development you'll need to make sure these steps are repeated in order to execute your Lambda and/or API Gateway locally.
 
@@ -66,13 +66,13 @@ If the previous command ran successfully you should now be able to hit the follo
 **SAM CLI** is used to emulate both Lambda and API Gateway locally and uses our `template.yaml` to understand how to bootstrap this environment (runtime, where the source code is, etc.) - The following excerpt is what the CLI will read in order to initialize an API and its routes:
 
 ```yaml
-...
+---
 Events:
-    HelloWorld:
-        Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-        Properties:
-            Path: /hello
-            Method: get
+  HelloWorld:
+    Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+    Properties:
+      Path: /hello
+      Method: get
 ```
 
 ## Packaging and deployment
@@ -120,11 +120,11 @@ After deployment is complete you can run the following command to retrieve the A
 aws cloudformation describe-stacks \
     --stack-name sam-app \
     --query 'Stacks[].Outputs'
-``` 
+```
 
 ## Testing
 
-We use [Mocha](http://gofreerange.com/mocha/docs) for testing our code and you can install it using gem: ``gem install mocha`` 
+We use [Mocha](http://gofreerange.com/mocha/docs) for testing our code and you can install it using gem: `gem install mocha`
 
 Next, we run our initial unit tests:
 
@@ -133,6 +133,7 @@ ruby tests/unit/test_hello.rb
 ```
 
 **NOTE**: It is recommended to use a Ruby Version Manager to manage, and work with multiple ruby environments from interpreters to sets of gems
+
 # Appendix
 
 ## AWS CLI commands
@@ -159,11 +160,10 @@ aws cloudformation describe-stacks \
 
 Here are a few ideas that you can use to get more acquainted as to how this overall process works:
 
-* Create an additional API resource (e.g. /hello/{proxy+}) and return the name requested through this new path
-* Update unit test to capture that
-* Package & Deploy
+- Create an additional API resource (e.g. /hello/{proxy+}) and return the name requested through this new path
+- Update unit test to capture that
+- Package & Deploy
 
 Next, you can use the following resources to know more about beyond hello world samples and how others structure their Serverless applications:
 
-* [AWS Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/)
-
+- [AWS Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/)
