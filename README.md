@@ -116,6 +116,47 @@ cd /vagrant/ops/aws/code_pipline
 ./create_stack.sh
 ```
 
+### git-secrets のセットアップ
+
+インストール
+
+```bash
+cd /home/vagrant
+git clone https://github.com/awslabs/git-secrets.git
+cd git-secrets/
+sudo make install
+cd ..
+rm -rf git-secrets/
+```
+
+既存プロジェクトにフックを設定
+
+```bash
+cd /vagrant
+git secrets --install
+```
+
+拒否条件を設定
+
+```bash
+git secrets --register-aws --global
+```
+
+レポジトリをスキャンする
+
+```bash
+cd /vagrant
+git secrets --scan -r
+```
+
+許可ルールを追加する
+
+```bash
+git config --add secrets.allowed docs/spec/hello_world.html
+git config --add secrets.allowed sam-app/tests/hello_world/event_file.json
+git config --add secrets.allowed sam-app/tests/unit/test_handler.rb
+```
+
 **[⬆ back to top](#構成)**
 
 ## 配置
