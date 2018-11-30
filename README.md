@@ -92,7 +92,7 @@ end
 ```bash
 cd /vagrant/
 bundle install
-ruby tests/unit/test_handler.rb
+ruby sam-app/tests/unit/test_handler.rb
 cd /vagrant/sam-app
 bundle install
 bundle install --deployment --path hello_world/vendor/bundle
@@ -125,9 +125,28 @@ SimpleCov.start
 ```
 
 ```bash
-cd /vagrant/sam-app
+cd /vagrant
 bundle install
-ruby tests/unit/test_handler.rb
+ruby sam-app/tests/unit/test_handler.rb
+```
+
+### コードチェッカのセットアップ
+
+`Gemfile`
+
+```
+group :development, :test do
+  gem 'mocha'
+  gem "simplecov"
+  gem 'rubocop', require: false
+end
+```
+
+```bash
+cd /vagrant
+bundle install
+bundle exec rubocop -a sam-app/hello_world/app.rb
+bundle exec rubocop -a sam-app/tests/unit/test_handler.rb
 ```
 
 **[⬆ back to top](#構成)**
@@ -136,3 +155,5 @@ ruby tests/unit/test_handler.rb
 
 - [SAM CLI (Beta)](https://github.com/awslabs/aws-sam-cli)
 - [Groom your app’s Ruby environment with rbenv.](https://github.com/rbenv/rbenv)
+- [SimpleCov](https://github.com/colszowka/simplecov)
+- [RuboCop](https://github.com/rubocop-hq/rubocop)

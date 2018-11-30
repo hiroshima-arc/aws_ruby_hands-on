@@ -9,4 +9,5 @@ gem "httparty"
 group :development, :test do
   gem 'mocha'
   gem "simplecov"
+  gem 'rubocop', require: false
 end
