@@ -1,5 +1,5 @@
 namespace :test do
-  WORK_DIR = 'sam-app'
+  WORK_DIR = 'dev/sam-app'
 
   desc 'コードチェック'
   task :lint do

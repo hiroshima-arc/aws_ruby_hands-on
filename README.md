@@ -172,7 +172,7 @@ aws s3 mb s3://ruby-hands-on
 デプロイを実行する
 
 ```bash
-cd /vagrant/sam-app
+cd /vagrant/dev/sam-app
 sam validate
 sam package --template-file template.yaml --s3-bucket ruby-hands-on --output-template-file packaged.yaml
 sam deploy --template-file packaged.yaml --stack-name ruby-hands-on-development --capabilities CAPABILITY_IAM
@@ -215,7 +215,8 @@ rake -T
 ### アプリケーションの作成
 
 ```bash
-cd /vagrant
+mkdir /vagrant/dev
+cd /vagrant/dev
 sam init --runtime ruby2.5
 cd sam-app
 ```
@@ -239,7 +240,7 @@ end
 cd /vagrant/
 bundle install
 ruby sam-app/tests/unit/test_handler.rb
-cd /vagrant/sam-app
+cd /vagrant/dev/sam-app
 bundle install
 bundle install --deployment --path hello_world/vendor/bundle
 mkdir tests/hello_world
@@ -261,7 +262,7 @@ group :development, :test do
 end
 ```
 
-`/vagrant/samp-app/tests/unit/test_handler`
+`/vagrant/dev/samp-app/tests/unit/test_handler`
 
 ```
 ・・・
@@ -273,7 +274,7 @@ SimpleCov.start
 ```bash
 cd /vagrant
 bundle install
-ruby sam-app/tests/unit/test_handler.rb
+ruby dev/sam-app/tests/unit/test_handler.rb
 ```
 
 ### コードチェッカのセットアップ
@@ -291,8 +292,8 @@ end
 ```bash
 cd /vagrant
 bundle install
-rubocop -a sam-app/hello_world/app.rb
-rubocop -a sam-app/tests/unit/test_handler.rb
+rubocop -a dev/sam-app/hello_world/app.rb
+rubocop -a dev/sam-app/tests/unit/test_handler.rb
 ```
 
 **[⬆ back to top](#構成)**

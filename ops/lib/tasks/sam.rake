@@ -1,5 +1,5 @@
 namespace :sam do
-  WORK_DIR = 'sam-app'
+  WORK_DIR = 'dev/sam-app'
 
   desc 'ローカル実行'
   task :local_invoke do

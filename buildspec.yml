@@ -5,16 +5,16 @@ phases:
     - bundle install
   pre_build:
     commands:
-    - cd sam-app ; ruby tests/unit/*.rb
+    - cd dev/sam-app ; ruby tests/unit/*.rb
   build:
     commands:
-    - cd sam-app ; bundle install
-    - cd sam-app ; bundle install --deployment --path hello_world/vendor/bundle
+    - cd dev/sam-app ; bundle install
+    - cd dev/sam-app ; bundle install --deployment --path hello_world/vendor/bundle
   post_build:
     commands:
     # env var BUILD_ARTIFACT_BUCKET is defined in ci.yaml
     - aws cloudformation package
-      --template-file sam-app/template.yaml
+      --template-file dev/sam-app/template.yaml
       --s3-bucket $BUILD_ARTIFACT_BUCKET
       --output-template-file SamDeploymentTemplate.yaml
 artifacts:
