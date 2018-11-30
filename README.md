@@ -109,6 +109,13 @@ source .env
 aws ec2 describe-regions
 ```
 
+### パイプラインのセットアップ
+
+```
+cd /vagrant/ops/aws/code_pipline
+./create_stack.sh
+```
+
 **[⬆ back to top](#構成)**
 
 ## 配置

@@ -1,0 +1,34 @@
+[
+  {
+    "ParameterKey": "ProjectName",
+    "ParameterValue": "ruby-hands-on-production"
+  },
+  {
+    "ParameterKey": "ProjectParameterOverrides",
+    "ParameterValue": "{}"
+  },
+  {
+    "ParameterKey": "GitHubOAuthToken",
+    "ParameterValue": "8dfb716cb34881b6574f72196769304f2b79cad9"
+  },
+  {
+    "ParameterKey": "GitHubRepoOwner",
+    "ParameterValue": "k2works"
+  },
+  {
+    "ParameterKey": "GitHubRepo",
+    "ParameterValue": "aws_sam_ruby_hands-on"
+  },
+  {
+    "ParameterKey": "GitHubBranch",
+    "ParameterValue": "master"
+  },
+  {
+    "ParameterKey": "GitHubBranchDest",
+    "ParameterValue": ""
+  },
+  {
+    "ParameterKey": "BuildImage",
+    "ParameterValue": "aws/codebuild/ruby:2.5.1"
+  }
+]
