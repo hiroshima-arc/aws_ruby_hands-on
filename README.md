@@ -66,6 +66,14 @@ gem install bundler rake
 
 ## 開発
 
+### アプリケーションの作成
+
+```bash
+cd /vagrant
+sam init --runtime ruby2.5
+cd sam-app
+```
+
 **[⬆ back to top](#構成)**
 
 # 参照
