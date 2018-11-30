@@ -10,6 +10,13 @@ Globals:
     Function:
         Timeout: 3
 
+    Api:
+      # enable CORS; to make more specific, change the origin wildcard
+      # to a particular domain name, e.g. "'www.example.com'"
+      Cors:
+        AllowMethods: "'*'"
+        AllowHeaders: "'*'"
+        AllowOrigin: "'*'"
 
 Resources:
 
