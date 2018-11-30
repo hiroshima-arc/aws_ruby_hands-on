@@ -23,6 +23,17 @@ AWS サーバーレスアプリケーションモデル (AWS SAM) ハンズオ�
 
 ## 構築
 
+### 開発用仮想マシンの起動・プロビジョニング
+
+- Docker のインストール
+- docker-compose のインストール
+- pip のインストール
+
+```bash
+vagrant up
+vagrant ssh
+```
+
 **[⬆ back to top](#構成)**
 
 ## 配置
