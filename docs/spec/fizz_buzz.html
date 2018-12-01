@@ -662,7 +662,9 @@ class FizzBuzz
   def self.generate(number)
     value = number
 
-    if (value % 3).zero?
+    if (value % 3).zero? &amp;&amp; (value % 5).zero?
+      'FizzBuzz'
+    elsif (value % 3).zero?
       'Fizz'
     elsif (value % 5).zero?
       'Buzz'
@@ -785,7 +787,7 @@ end</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-12-01 16:46:05 JST
+Last updated 2018-12-01 16:54:46 JST
 </div>
 </div>
 </body>
