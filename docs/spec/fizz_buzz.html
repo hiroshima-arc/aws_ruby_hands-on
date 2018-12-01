@@ -535,6 +535,7 @@ require_relative '../../../fizz_buzz/fizz_buzz'
 class FizzBuzzTest &lt; Test::Unit::TestCase
   test '3ならFizzを返す' do
     assert_equal('Fizz', FizzBuzz.generate(3))
+    assert_not_equal('Fizz', FizzBuzz.generate(1))
   end
 end</code></pre>
 </div>
@@ -768,7 +769,7 @@ end</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-12-01 16:29:03 JST
+Last updated 2018-12-01 16:32:15 JST
 </div>
 </div>
 </body>

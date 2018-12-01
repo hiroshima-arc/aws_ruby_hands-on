@@ -6,5 +6,6 @@ require_relative '../../../fizz_buzz/fizz_buzz'
 class FizzBuzzTest < Test::Unit::TestCase
   test '3ならFizzを返す' do
     assert_equal('Fizz', FizzBuzz.generate(3))
+    assert_not_equal('Fizz', FizzBuzz.generate(1))
   end
 end
