@@ -5,6 +5,7 @@ namespace :sam do
   task :local_invoke do
     cd WORK_DIR do
       sh 'sam local invoke HelloWorldFunction --event tests/hello_world/event_file.json'
+      sh 'sam local invoke FizzBuzzFunction --event tests/fizz_buzz/event_file.json'
     end
   end
 
