@@ -23,4 +23,8 @@ class FizzBuzzTest < Test::Unit::TestCase
     assert_equal('1', FizzBuzz.generate(1))
     assert_equal('101', FizzBuzz.generate(101))
   end
+
+  test "5ならば[1, 2, 'Fizz', 4, 'Buzz']を返す" do
+    assert_equal([1, 2, 'Fizz', 4, 'Buzz'], FizzBuzz.iterate(5))
+  end
 end

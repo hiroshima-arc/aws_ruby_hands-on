@@ -14,4 +14,8 @@ class FizzBuzz
 
     value.to_s
   end
+
+  def self.iterate(count)
+    # code here
+  end
 end
