@@ -542,6 +542,11 @@ class FizzBuzzTest &lt; Test::Unit::TestCase
     assert_equal('Buzz', FizzBuzz.generate(5))
     assert_not_equal('Buzz', FizzBuzz.generate(1))
   end
+
+  test '15ならFizzBuzzを返す' do
+    assert_equal('FizzBuzz', FizzBuzz.generate(15))
+    assert_not_equal('FizzBuzz', FizzBuzz.generate(1))
+  end
 end</code></pre>
 </div>
 </div>
@@ -780,7 +785,7 @@ end</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-12-01 16:42:00 JST
+Last updated 2018-12-01 16:46:05 JST
 </div>
 </div>
 </body>

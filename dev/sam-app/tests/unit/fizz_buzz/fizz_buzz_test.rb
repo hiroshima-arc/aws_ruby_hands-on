@@ -13,4 +13,9 @@ class FizzBuzzTest < Test::Unit::TestCase
     assert_equal('Buzz', FizzBuzz.generate(5))
     assert_not_equal('Buzz', FizzBuzz.generate(1))
   end
+
+  test '15ならFizzBuzzを返す' do
+    assert_equal('FizzBuzz', FizzBuzz.generate(15))
+    assert_not_equal('FizzBuzz', FizzBuzz.generate(1))
+  end
 end
