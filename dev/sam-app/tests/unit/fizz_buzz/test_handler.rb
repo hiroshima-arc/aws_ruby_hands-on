@@ -5,7 +5,7 @@ require 'test/unit'
 require 'mocha/test_unit'
 require 'simplecov'
 SimpleCov.start
-require_relative '../../../hello_world/app'
+require_relative '../../../fizz_buzz/app'
 
 class HelloWorldTest < Test::Unit::TestCase
   def setup

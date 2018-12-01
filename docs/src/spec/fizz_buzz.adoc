@@ -49,14 +49,28 @@ User <- FizzBuzz
 
 == 開発
 
+=== テストコード
+
 [source, ruby]
 ----
-include::../../../dev/sam-app/fizz_buzz/app.rb[]
+include::../../../dev/sam-app/tests/unit/fizz_buzz/fizz_buzz_test.rb[]
 ----
 
 [source, ruby]
 ----
 include::../../../dev/sam-app/tests/unit/fizz_buzz/test_handler.rb[]
+----
+
+=== プロダクトコード
+
+[source, ruby]
+----
+include::../../../dev/sam-app/fizz_buzz/fizz_buzz.rb[]
+----
+
+[source, ruby]
+----
+include::../../../dev/sam-app/fizz_buzz/app.rb[]
 ----
 
 == 参照
