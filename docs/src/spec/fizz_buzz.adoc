@@ -28,6 +28,7 @@ skinparam packageStyle rectangle
 actor User
 rectangle FizzBuzz {
   User -- (値を出力する)
+  User -- (複数の値を出力する)
 }
 ----
 
