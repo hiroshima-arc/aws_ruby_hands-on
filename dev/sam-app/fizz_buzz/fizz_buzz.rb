@@ -6,6 +6,8 @@ class FizzBuzz
 
     if (value % 3).zero?
       'Fizz'
+    elsif (value % 5).zero?
+      'Buzz'
     end
   end
 end
