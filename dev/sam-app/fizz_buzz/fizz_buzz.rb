@@ -16,6 +16,8 @@ class FizzBuzz
   end
 
   def self.iterate(count)
-    [1, 2, 'Fizz', 4, 'Buzz']
+    array = []
+    (1..count).each { |n| array.push(FizzBuzz.generate(n)) }
+    array
   end
 end

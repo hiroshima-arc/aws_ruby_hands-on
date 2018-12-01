@@ -25,10 +25,10 @@ class FizzBuzzTest < Test::Unit::TestCase
   end
 
   test "5ならば[1, 2, 'Fizz', 4, 'Buzz']を返す" do
-    assert_equal([1, 2, 'Fizz', 4, 'Buzz'], FizzBuzz.iterate(5))
+    assert_equal(%w[1 2 Fizz 4 Buzz], FizzBuzz.iterate(5))
   end
 
   test "15ならば[1, 2, 'Fizz', 4, 'Buzz', 6, 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'FizzBuzz']を返す" do
-    assert_equal([1, 2, 'Fizz', 4, 'Buzz', 6, 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'FizzBuzz'], FizzBuzz.iterate(15))
+    assert_equal(%w[1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz], FizzBuzz.iterate(15))
   end
 end
