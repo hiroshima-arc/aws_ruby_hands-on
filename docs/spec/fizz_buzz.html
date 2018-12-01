@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.6.1">
-<title>Hello World</title>
+<title>Fizz Buzz</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -427,7 +427,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Hello World</h1>
+<h1>Fizz Buzz</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -440,7 +440,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_シーケンス図">2.4. シーケンス図</a></li>
 </ul>
 </li>
-<li><a href="#_実装">3. 実装</a></li>
+<li><a href="#_開発">3. 開発</a></li>
 <li><a href="#_参照">4. 参照</a></li>
 </ul>
 </div>
@@ -449,7 +449,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_仕様">1. 仕様</h2>
 <div class="sectionbody">
-
+<div class="ulist">
+<ul>
+<li>
+<p>３で割り切れる場合は「Fizz」を出力する。</p>
+</li>
+<li>
+<p>５で割り切れる場合は「Buzz」を出力する。</p>
+</li>
+<li>
+<p>両者で割り切れる場合は「FizzBuzz」を出力する。</p>
+</li>
+<li>
+<p>指定された回数だけ繰り返し実行する。</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -457,56 +472,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_todoリスト">2.1. TODOリスト</h3>
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p>&#10063; TODO</p>
-</li>
-<li>
-<p>&#10003; <span class="line-through">TODO DONE</span></p>
-</li>
-</ul>
-</div>
+
 </div>
 <div class="sect2">
 <h3 id="_ユースケース図">2.2. ユースケース図</h3>
-<div class="imageblock">
-<div class="content">
-<img src="diag-0cedeb4ec34c9f83ec0b9d9a01738a0a.png" alt="diag 0cedeb4ec34c9f83ec0b9d9a01738a0a" width="323" height="290">
-</div>
-</div>
+
 </div>
 <div class="sect2">
 <h3 id="_クラス図">2.3. クラス図</h3>
-<div class="imageblock">
-<div class="content">
-<img src="diag-52188ed3e6021890c7143b0584c16e9c.png" alt="diag 52188ed3e6021890c7143b0584c16e9c" width="375" height="194">
-</div>
-</div>
+
 </div>
 <div class="sect2">
 <h3 id="_シーケンス図">2.4. シーケンス図</h3>
-<div class="imageblock">
-<div class="content">
-<img src="diag-c9982f70efc55384b0a833d5587c23b4.png" alt="diag c9982f70efc55384b0a833d5587c23b4" width="369" height="280">
-</div>
-</div>
+
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_実装">3. 実装</h2>
+<h2 id="_開発">3. 開発</h2>
 <div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-ruby" data-lang="ruby">Unresolved directive in hello_world.adoc - include::../../../sam-app/hello_world/app.rb[]</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-ruby" data-lang="ruby">Unresolved directive in hello_world.adoc - include::../../../sam-app/tests/unit/test_handler.rb[]</code></pre>
-</div>
-</div>
+
 </div>
 </div>
 <div class="sect1">
@@ -515,7 +500,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p><a href="http://plantuml.com">PlantUML</a></p>
+<p><a href="http://asciidoctor.org/">Asciidoctor</a></p>
+</li>
+<li>
+<p><a href="http://www.plantuml.com">PlantUML</a></p>
 </li>
 </ul>
 </div>
@@ -524,7 +512,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-30 17:21:56 JST
+Last updated 2018-12-01 14:41:04 JST
 </div>
 </div>
 </body>

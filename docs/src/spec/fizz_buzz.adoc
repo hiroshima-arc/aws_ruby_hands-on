@@ -1,0 +1,26 @@
+:toc: left
+:toclevels: 5
+:sectnums:
+= Fizz Buzz
+
+== 仕様
+* ３で割り切れる場合は「Fizz」を出力する。
+* ５で割り切れる場合は「Buzz」を出力する。
+* 両者で割り切れる場合は「FizzBuzz」を出力する。
+* 指定された回数だけ繰り返し実行する。
+
+== 設計
+
+=== TODOリスト
+
+=== ユースケース図
+
+=== クラス図
+
+=== シーケンス図
+
+== 開発
+
+== 参照
+* http://asciidoctor.org/[Asciidoctor]
+* http://www.plantuml.com[PlantUML]
