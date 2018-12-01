@@ -553,7 +553,7 @@ class FizzBuzzTest &lt; Test::Unit::TestCase
 
   test '条件を満たさない場合は値を返す' do
     assert_equal('1', FizzBuzz.generate(1))
-    assert_equal('100', FizzBuzz.generate(100))
+    assert_equal('101', FizzBuzz.generate(101))
   end
 end</code></pre>
 </div>
@@ -670,13 +670,15 @@ class FizzBuzz
   def self.generate(number)
     value = number
 
-    if (value % 3).zero? &amp;&amp; (value % 5).zero?
-      'FizzBuzz'
-    elsif (value % 3).zero?
-      'Fizz'
-    elsif (value % 5).zero?
-      'Buzz'
+    if (number % 3).zero? &amp;&amp; (number % 5).zero?
+      value = 'FizzBuzz'
+    elsif (number % 3).zero?
+      value = 'Fizz'
+    elsif (number % 5).zero?
+      value = 'Buzz'
     end
+
+    value.to_s
   end
 end</code></pre>
 </div>
@@ -795,7 +797,7 @@ end</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-12-01 17:07:36 JST
+Last updated 2018-12-01 17:11:01 JST
 </div>
 </div>
 </body>

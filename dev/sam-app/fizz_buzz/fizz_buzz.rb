@@ -4,12 +4,14 @@ class FizzBuzz
   def self.generate(number)
     value = number
 
-    if (value % 3).zero? && (value % 5).zero?
-      'FizzBuzz'
-    elsif (value % 3).zero?
-      'Fizz'
-    elsif (value % 5).zero?
-      'Buzz'
+    if (number % 3).zero? && (number % 5).zero?
+      value = 'FizzBuzz'
+    elsif (number % 3).zero?
+      value = 'Fizz'
+    elsif (number % 5).zero?
+      value = 'Buzz'
     end
+
+    value.to_s
   end
 end

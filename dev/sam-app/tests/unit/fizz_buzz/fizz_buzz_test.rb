@@ -21,6 +21,6 @@ class FizzBuzzTest < Test::Unit::TestCase
 
   test '条件を満たさない場合は値を返す' do
     assert_equal('1', FizzBuzz.generate(1))
-    assert_equal('100', FizzBuzz.generate(100))
+    assert_equal('101', FizzBuzz.generate(101))
   end
 end
