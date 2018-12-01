@@ -20,6 +20,16 @@
 
 === ユースケース図
 
+[plantuml]
+----
+left to right direction
+skinparam packageStyle rectangle
+actor User
+rectangle FizzBuzz {
+  User -- (値を出力する)
+}
+----
+
 === クラス図
 
 === シーケンス図
