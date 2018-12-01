@@ -32,6 +32,12 @@ rectangle FizzBuzz {
 
 === クラス図
 
+[plantuml]
+----
+class FizzBuzz {
+}
+----
+
 === シーケンス図
 
 == 開発
