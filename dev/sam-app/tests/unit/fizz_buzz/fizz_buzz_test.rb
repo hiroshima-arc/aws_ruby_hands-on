@@ -18,4 +18,9 @@ class FizzBuzzTest < Test::Unit::TestCase
     assert_equal('FizzBuzz', FizzBuzz.generate(15))
     assert_not_equal('FizzBuzz', FizzBuzz.generate(1))
   end
+
+  test '条件を満たさない場合は値を返す' do
+    assert_equal('1', FizzBuzz.generate(1))
+    assert_equal('100', FizzBuzz.generate(100))
+  end
 end
