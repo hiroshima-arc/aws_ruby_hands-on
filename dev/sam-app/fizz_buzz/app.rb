@@ -7,9 +7,9 @@ require_relative 'fizz_buzz'
 def generate(event:, context:)
   data = nil
   number = 0
-  unless event[:queryStringParameters].nil?
-    unless event[:queryStringParameters][:number].nil?
-      number = event[:queryStringParameters][:number]
+  unless event['queryStringParameters'].nil?
+    unless event['queryStringParameters']['number'].nil?
+      number = event['queryStringParameters']['number']
     end
   end
 
@@ -26,10 +26,9 @@ end
 
 def iterate(event:, context:)
   data = nil
-  params = { Item: event[:body] }
-
+  params = { Item: JSON.parse(event['body']) }
   begin
-    count = params[:Item][:count]
+    count = params[:Item]['count']
     data = FizzBuzz.iterate(count.to_i)
   rescue HTTParty::Error => error
     puts "Application error occurred: #{error.inspect}"

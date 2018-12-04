@@ -36,21 +36,31 @@ Resources:
                         Path: /hello
                         Method: get
 
-    FizzBuzzFunction:
-         Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-         Properties:
-            CodeUri: fizz_buzz/
-            Handler: app.lambda_handler
-            Runtime: ruby2.5
-            Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
-              Variables:
-                PARAM1: VALUE
-            Events:
-              FizzBuzz:
-                Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-                Properties:
-                  Path: /fizz_buzz
-                  Method: get
+    FizzBuzzGenerateFunction:
+      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+      Properties:
+        CodeUri: fizz_buzz/
+        Handler: app.generate
+        Runtime: ruby2.5
+        Events:
+          FizzBuzz:
+            Type: Api
+            Properties:
+              Path: /fizz_buzz/generate
+              Method: get
+
+    FizzBuzzIterateFunction:
+      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+      Properties:
+        CodeUri: fizz_buzz/
+        Handler: app.iterate
+        Runtime: ruby2.5
+        Events:
+          FizzBuzz:
+            Type: Api
+            Properties:
+              Path: /fizz_buzz/iterate
+              Method: post
 
 Outputs:
 
@@ -65,3 +75,7 @@ Outputs:
     HelloWorldFunctionIamRole:
       Description: "Implicit IAM Role created for Hello World function"
       Value: !GetAtt HelloWorldFunctionRole.Arn
+
+    FizzBuzzGenerateApi:
+      Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/fizz_buzz/generate?number=3"

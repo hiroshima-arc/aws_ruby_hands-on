@@ -1,18 +1,36 @@
 namespace :sam do
-  WORK_DIR = 'dev/sam-app'
+  WORK_DIR = 'dev/sam-app'.freeze
 
-  desc 'ローカル実行'
-  task :local_invoke do
-    cd WORK_DIR do
-      sh 'sam local invoke HelloWorldFunction --event tests/hello_world/event_file.json'
-      sh 'sam local invoke FizzBuzzFunction --event tests/fizz_buzz/event_file.json'
+  namespace :local do
+    desc 'ローカルサーバー実行'
+    task :api do
+      cd WORK_DIR do
+        sh 'sam local start-api --host 0.0.0.0'
+      end
     end
-  end
 
-  desc 'ローカルサーバー実行'
-  task :local_api do
-    cd WORK_DIR do
-      sh 'sam local start-api --host 0.0.0.0'
+    desc 'ローカル実行'
+    task invoke: %i[hellow_world:hello fizz_buzz:generate fizz_buzz:iterate]
+    namespace :hellow_world do
+      task :hello do
+        cd WORK_DIR do
+          sh 'sam local invoke HelloWorldFunction --event tests/hello_world/event_file.json'
+        end
+      end
+    end
+
+    namespace :fizz_buzz do
+      task :generate do
+        cd WORK_DIR do
+          sh 'sam local invoke FizzBuzzGenerateFunction --event tests/fizz_buzz/event_file.json'
+        end
+      end
+
+      task :iterate do
+        cd WORK_DIR do
+          sh 'sam local invoke FizzBuzzIterateFunction --event tests/fizz_buzz/event_file.json'
+        end
+      end
     end
   end
 
@@ -20,6 +38,17 @@ namespace :sam do
   task :validate do
     cd WORK_DIR do
       sh 'sam validate'
+    end
+  end
+
+  desc 'アプリケーションパッケージバンドル'
+  task :vendor do
+    cd WORK_DIR do
+      FileUtils.rm_rf('hello_world/vendor/')
+      FileUtils.rm_rf('fizz_buzz/vendor/')
+      sh 'bundle install'
+      sh 'bundle install --deployment --path hello_world/vendor/bundle'
+      sh 'bundle install --deployment --path fizz_buzz/vendor/bundle'
     end
   end
 
@@ -45,5 +74,5 @@ namespace :sam do
   end
 
   desc 'リリース'
-  task release: %i[validate package deploy check]
+  task release: %i[vendor validate package deploy check]
 end

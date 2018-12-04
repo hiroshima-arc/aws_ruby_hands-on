@@ -31,10 +31,10 @@ class FizzBuzzTest < Test::Unit::TestCase
     def test_5ならば配列を返す
       @mock_response = {
           statusCode: 200,
-          body: ['1', '2', 'Fizz', '4', 'Buzz']
+          'body': ['1', '2', 'Fizz', '4', 'Buzz']
       }
       @event = {
-          body: {count: '5'}
+          "body" => "{\"count\": \"5\"}"
       }
       expects(:iterate).with(event: @event, context: '').returns(@mock_response)
 
