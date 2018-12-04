@@ -2,22 +2,23 @@ version: 0.1
 phases:
   install:
     commands:
-    - bundle install
+      - bundle install
   pre_build:
     commands:
-    - cd dev/sam-app ; ruby tests/unit/*.rb
+      - cd dev/sam-app ; ruby tests/unit/*.rb
   build:
     commands:
-    - cd dev/sam-app ; bundle install
-    - cd dev/sam-app ; bundle install --deployment --path hello_world/vendor/bundle
+      - bundle install --deployment
+      - cp -r ./vendor dev/sam-app/hello_world
+      - rm -rf ./vendor
   post_build:
     commands:
-    # env var BUILD_ARTIFACT_BUCKET is defined in ci.yaml
-    - aws cloudformation package
-      --template-file dev/sam-app/template.yaml
-      --s3-bucket $BUILD_ARTIFACT_BUCKET
-      --output-template-file SamDeploymentTemplate.yaml
+      # env var BUILD_ARTIFACT_BUCKET is defined in ci.yaml
+      - aws cloudformation package
+        --template-file dev/sam-app/template.yaml
+        --s3-bucket $BUILD_ARTIFACT_BUCKET
+        --output-template-file SamDeploymentTemplate.yaml
 artifacts:
   type: zip
   files:
-  - SamDeploymentTemplate.yaml
+    - SamDeploymentTemplate.yaml
