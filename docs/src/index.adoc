@@ -18,10 +18,13 @@
 == 構成
 
 * <<anchor-1,HelloWorld>>
+* <<anchor-1,FizzBuzz>>
 
 == 詳細
 
 === link:./spec/hello_world.html[HelloWorld][[anchor-1]]
+=== link:./spec/fizz_buzz.html[FizzBuzz][[anchor-1]]
+
 == 参照
 * http://asciidoctor.org/[Asciidoctor]
 * http://www.plantuml.com[PlantUML]

@@ -8,6 +8,7 @@ gem "httparty"
 gem "rake"
 
 group :development, :test do
+  gem 'test-unit'
   gem 'mocha'
   gem "simplecov"
   gem 'rubocop', require: false

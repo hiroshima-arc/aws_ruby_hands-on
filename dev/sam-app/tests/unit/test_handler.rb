@@ -75,8 +75,8 @@ class HelloWorldTest < Test::Unit::TestCase
     @mock_response = {
       statusCode: 200,
       headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
       body: {
         message: 'Hello World!',
