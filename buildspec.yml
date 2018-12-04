@@ -13,7 +13,7 @@ phases:
       - bundle install --deployment
       - cp -r ./vendor dev/sam-app/hello_world
       - cp -r ./vendor dev/sam-app/fizz_buzz
-      - rm -rf ./vendor ; ls -al
+      - rm -rf ./vendor
   post_build:
     commands:
       # env var BUILD_ARTIFACT_BUCKET is defined in ci.yaml
