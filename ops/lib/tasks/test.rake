@@ -14,7 +14,8 @@ namespace :test do
   task :unit do
     cd WORK_DIR do
       sh "ruby tests/unit/*.rb"
-      sh "ruby tests/unit/**/*.rb"
+      sh "ruby tests/unit/**/test_*.rb"
+      sh "ruby tests/unit/**/*_test.rb"
     end
   end
 

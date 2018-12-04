@@ -7,7 +7,7 @@ require 'simplecov'
 SimpleCov.start
 require_relative '../../../fizz_buzz/app'
 
-class HelloWorldTest < Test::Unit::TestCase
+class FizzBuzzTest < Test::Unit::TestCase
   def setup
     @event = {
       body: 'eyJ0ZXN0IjoiYm9keSJ9',
@@ -85,13 +85,41 @@ class HelloWorldTest < Test::Unit::TestCase
     }
   end
 
-  def test_lambda_handler
-    expects(:lambda_handler).with(event: @event, context: '').returns(@mock_response)
-    response = lambda_handler(event: @event, context: '')
-    json_body = JSON.parse(response[:body])
+  sub_test_case '.generate' do
+    def test_3ならばFizzを返す
+      @mock_response = {
+          statusCode: 200,
+          body: 'Fizz'
+      }
+      @event = {
+          queryStringParameters: { number: '3' },
+      }
+      expects(:generate).with(event: @event, context: '').returns(@mock_response)
 
-    assert_equal(200, response[:statusCode])
-    assert_equal('Hello World!', json_body['message'])
-    assert_equal('1.1.1.1', json_body['location'])
+      response = generate(event: @event, context: '')
+      result = response[:body]
+
+      assert_equal(200, response[:statusCode])
+      assert_equal('Fizz', result)
+    end
+  end
+
+  sub_test_case '.iterate' do
+    def test_5ならば配列を返す
+      @mock_response = {
+          statusCode: 200,
+          body: ['1', '2', 'Fizz', '4', 'Buzz']
+      }
+      @event = {
+          body: {count: '5'}
+      }.to_json
+      expects(:iterate).with(event: @event, context: '').returns(@mock_response)
+
+      response = iterate(event: @event, context: '')
+      result = response[:body]
+
+      assert_equal(200, response[:statusCode])
+      assert_equal(%w[1 2 Fizz 4 Buzz], result)
+    end
   end
 end
