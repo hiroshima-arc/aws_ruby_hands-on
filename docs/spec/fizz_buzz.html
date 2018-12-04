@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.6.1">
-<title>AWS サーバーレスアプリケーションモデル (AWS SAM) ハンズオン(Ruby)</title>
+<title>Fizz Buzz</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -427,86 +427,289 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>AWS サーバーレスアプリケーションモデル (AWS SAM) ハンズオン(Ruby)</h1>
+<h1>Fizz Buzz</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_目的">1. 目的</a></li>
-<li><a href="#_前提">2. 前提</a></li>
-<li><a href="#_構成">3. 構成</a></li>
-<li><a href="#_詳細">4. 詳細</a>
+<li><a href="#_仕様">1. 仕様</a></li>
+<li><a href="#_設計">2. 設計</a>
 <ul class="sectlevel2">
-<li><a href="#_a_href_spec_hello_world_html_helloworld_a_a_id_anchor_1_a">4.1. <a href="./spec/hello_world.html">HelloWorld</a><a id="anchor-1"></a></a></li>
-<li><a href="#_a_href_spec_fizz_buzz_html_fizzbuzz_a_a_id_anchor_1_a">4.2. <a href="./spec/fizz_buzz.html">FizzBuzz</a><a id="anchor-1"></a></a></li>
+<li><a href="#_todoリスト">2.1. TODOリスト</a></li>
+<li><a href="#_ユースケース図">2.2. ユースケース図</a></li>
+<li><a href="#_クラス図">2.3. クラス図</a></li>
+<li><a href="#_シーケンス図">2.4. シーケンス図</a></li>
 </ul>
 </li>
-<li><a href="#_参照">5. 参照</a></li>
+<li><a href="#_開発">3. 開発</a>
+<ul class="sectlevel2">
+<li><a href="#_テストコード">3.1. テストコード</a></li>
+<li><a href="#_プロダクトコード">3.2. プロダクトコード</a></li>
+</ul>
+</li>
+<li><a href="#_参照">4. 参照</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_目的">1. 目的</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>開発ドキュメントの管理</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_前提">2. 前提</h2>
-<div class="sectionbody">
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ソフトウェア</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">バージョン</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">備考</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ruby</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.5.3</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_構成">3. 構成</h2>
+<h2 id="_仕様">1. 仕様</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#anchor-1">HelloWorld</a></p>
+<p>３で割り切れる場合は「Fizz」を出力する。</p>
 </li>
 <li>
-<p><a href="#anchor-1">FizzBuzz</a></p>
+<p>５で割り切れる場合は「Buzz」を出力する。</p>
+</li>
+<li>
+<p>両者で割り切れる場合は「FizzBuzz」を出力する。</p>
+</li>
+<li>
+<p>上記以外の場合は与えられた数字を出力する。</p>
+</li>
+<li>
+<p>指定された回数だけ繰り返し実行する。</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_詳細">4. 詳細</h2>
+<h2 id="_設計">2. 設計</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_a_href_spec_hello_world_html_helloworld_a_a_id_anchor_1_a">4.1. <a href="./spec/hello_world.html">HelloWorld</a><a id="anchor-1"></a></h3>
-
+<h3 id="_todoリスト">2.1. TODOリスト</h3>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p>&#10003; 「Fizz」を出力できるようにする</p>
+</li>
+<li>
+<p>&#10003; 「Buzz」を出力できるようにする</p>
+</li>
+<li>
+<p>&#10003; 「FizzBuzz」を出力できるようにする</p>
+</li>
+<li>
+<p>&#10003; 繰り返し実行できるようにする</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_a_href_spec_fizz_buzz_html_fizzbuzz_a_a_id_anchor_1_a">4.2. <a href="./spec/fizz_buzz.html">FizzBuzz</a><a id="anchor-1"></a></h3>
-
+<h3 id="_ユースケース図">2.2. ユースケース図</h3>
+<div class="imageblock">
+<div class="content">
+<img src="diag-18b116208c0839035ae385fac67dfa1d.png" alt="diag 18b116208c0839035ae385fac67dfa1d" width="272" height="162">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_クラス図">2.3. クラス図</h3>
+<div class="imageblock">
+<div class="content">
+<img src="diag-adeda49ba7b0005cfe35cfe3af0a606e.png" alt="diag adeda49ba7b0005cfe35cfe3af0a606e" width="99" height="66">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_シーケンス図">2.4. シーケンス図</h3>
+<div class="imageblock">
+<div class="content">
+<img src="diag-bcd05c6241086fc666de4ee53d6558c0.png" alt="diag bcd05c6241086fc666de4ee53d6558c0" width="140" height="220">
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_参照">5. 参照</h2>
+<h2 id="_開発">3. 開発</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_テストコード">3.1. テストコード</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">require 'test/unit'
+require 'simplecov'
+SimpleCov.start
+require_relative '../../../fizz_buzz/fizz_buzz'
+
+class FizzBuzzTest &lt; Test::Unit::TestCase
+  test '3ならFizzを返す' do
+    assert_equal('Fizz', FizzBuzz.generate(3))
+    assert_not_equal('Fizz', FizzBuzz.generate(1))
+  end
+
+  test '5ならBuzzを返す' do
+    assert_equal('Buzz', FizzBuzz.generate(5))
+    assert_not_equal('Buzz', FizzBuzz.generate(1))
+  end
+
+  test '15ならFizzBuzzを返す' do
+    assert_equal('FizzBuzz', FizzBuzz.generate(15))
+    assert_not_equal('FizzBuzz', FizzBuzz.generate(1))
+  end
+
+  test '条件を満たさない場合は値を返す' do
+    assert_equal('1', FizzBuzz.generate(1))
+    assert_equal('101', FizzBuzz.generate(101))
+  end
+
+  test "5ならば[1, 2, 'Fizz', 4, 'Buzz']を返す" do
+    assert_equal(%w[1 2 Fizz 4 Buzz], FizzBuzz.iterate(5))
+  end
+
+  test "15ならば[1, 2, 'Fizz', 4, 'Buzz', 6, 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'FizzBuzz']を返す" do
+    assert_equal(%w[1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz], FizzBuzz.iterate(15))
+  end
+end</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+require 'json'
+require 'test/unit'
+require 'mocha/test_unit'
+require 'simplecov'
+SimpleCov.start
+require_relative '../../../fizz_buzz/app'
+
+class FizzBuzzTest &lt; Test::Unit::TestCase
+  sub_test_case '#generate' do
+    def test_3ならばFizzを返す
+      @mock_response = {
+          statusCode: 200,
+          body: 'Fizz'
+      }
+      @event = {
+          queryStringParameters: { number: '3' },
+      }
+      expects(:generate).with(event: @event, context: '').returns(@mock_response)
+
+      response = generate(event: @event, context: '')
+      result = response[:body]
+
+      assert_equal(200, response[:statusCode])
+      assert_equal('Fizz', result)
+    end
+  end
+
+  sub_test_case '#iterate' do
+    def test_5ならば配列を返す
+      @mock_response = {
+          statusCode: 200,
+          'body': ['1', '2', 'Fizz', '4', 'Buzz']
+      }
+      @event = {
+          "body" =&gt; "{\"count\": \"5\"}"
+      }
+      expects(:iterate).with(event: @event, context: '').returns(@mock_response)
+
+      response = iterate(event: @event, context: '')
+      result = response[:body]
+
+      assert_equal(200, response[:statusCode])
+      assert_equal(%w[1 2 Fizz 4 Buzz], result)
+    end
+  end
+end</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_プロダクトコード">3.2. プロダクトコード</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+class FizzBuzz
+  def self.generate(number)
+    value = number
+
+    if (number % 3).zero? &amp;&amp; (number % 5).zero?
+      value = 'FizzBuzz'
+    elsif (number % 3).zero?
+      value = 'Fizz'
+    elsif (number % 5).zero?
+      value = 'Buzz'
+    end
+
+    value.to_s
+  end
+
+  def self.iterate(count)
+    array = []
+    (1..count).each { |n| array.push(FizzBuzz.generate(n)) }
+    array
+  end
+end</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+require 'httparty'
+require 'json'
+require_relative 'fizz_buzz'
+
+def generate(event:, context:)
+  data = nil
+  number = 0
+  unless event['queryStringParameters'].nil?
+    unless event['queryStringParameters']['number'].nil?
+      number = event['queryStringParameters']['number']
+    end
+  end
+
+  begin
+    data = FizzBuzz.generate(number.to_i)
+  rescue HTTParty::Error =&gt; error
+    puts "Application error occurred: #{error.inspect}"
+    create_response(500, error.inspect)
+  end
+
+  puts "Application execute with params: #{number}"
+  create_response(200, data)
+end
+
+def iterate(event:, context:)
+  data = nil
+  params = { Item: JSON.parse(event['body']) }
+  begin
+    count = params[:Item]['count']
+    data = FizzBuzz.iterate(count.to_i)
+  rescue HTTParty::Error =&gt; error
+    puts "Application error occurred: #{error.inspect}"
+    create_response(500, error.inspect)
+  end
+
+  puts "Application execute with params: #{params[:Item]}"
+  create_response(200, data)
+end
+
+private
+
+def create_response(status_code, data)
+  {
+      statusCode: status_code,
+      headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+      },
+      body: data
+  }
+end</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_参照">4. 参照</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -516,9 +719,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li>
 <p><a href="http://www.plantuml.com">PlantUML</a></p>
 </li>
-<li>
-<p><a href="https://about.draw.io/">draw.io</a></p>
-</li>
 </ul>
 </div>
 </div>
@@ -526,7 +726,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-12-04 17:04:31 JST
+Last updated 2018-12-04 15:03:42 JST
 </div>
 </div>
 </body>

@@ -6,6 +6,7 @@ namespace :test do
     cd WORK_DIR do
       sh "rubocop -a hello_world/app.rb"
       sh "rubocop -a tests/unit/test_handler.rb"
+      sh "rubocop -a tests/unit/**/*.rb"
     end
   end
 
@@ -13,6 +14,8 @@ namespace :test do
   task :unit do
     cd WORK_DIR do
       sh "ruby tests/unit/*.rb"
+      sh "ruby tests/unit/**/test_*.rb"
+      sh "ruby tests/unit/**/*_test.rb"
     end
   end
 

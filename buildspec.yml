@@ -6,10 +6,13 @@ phases:
   pre_build:
     commands:
       - cd dev/sam-app ; ruby tests/unit/*.rb
+      - cd dev/sam-app ; ruby tests/unit/**/test_*.rb
+      - cd dev/sam-app ; ruby tests/unit/**/*_test.rb
   build:
     commands:
       - bundle install --deployment
       - cp -r ./vendor dev/sam-app/hello_world
+      - cp -r ./vendor dev/sam-app/fizz_buzz
       - rm -rf ./vendor
   post_build:
     commands:
