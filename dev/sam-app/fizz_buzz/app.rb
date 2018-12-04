@@ -2,88 +2,53 @@
 
 require 'httparty'
 require 'json'
+require_relative 'fizz_buzz'
 
-def lambda_handler(event:, context:)
-  # Sample pure Lambda function
-
-  # Parameters
-  # ----------
-  # event: Hash, required
-  #     API Gateway Lambda Proxy Input Format
-
-  #     {
-  #         "resource": "Resource path",
-  #         "path": "Path parameter",
-  #         "httpMethod": "Incoming request's method name"
-  #         "headers": {Incoming request headers}
-  #         "queryStringParameters": {query string parameters }
-  #         "pathParameters":  {path parameters}
-  #         "stageVariables": {Applicable stage variables}
-  #         "requestContext": {Request context, including authorizer-returned key-value pairs}
-  #         "body": "A JSON string of the request payload."
-  #         "isBase64Encoded": "A boolean flag to indicate if the applicable request payload is Base64-encode"
-  #     }
-
-  #     https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
-
-  # context: object, required
-  #     Lambda Context runtime methods and attributes
-
-  # Attributes
-  # ----------
-
-  # context.aws_request_id: str
-  #      Lambda request ID
-  # context.client_context: object
-  #      Additional context when invoked through AWS Mobile SDK
-  # context.function_name: str
-  #      Lambda function name
-  # context.function_version: str
-  #      Function version identifier
-  # context.get_remaining_time_in_millis: function
-  #      Time in milliseconds before function times out
-  # context.identity:
-  #      Cognito identity provider context when invoked through AWS Mobile SDK
-  # context.invoked_function_arn: str
-  #      Function ARN
-  # context.log_group_name: str
-  #      Cloudwatch Log group name
-  # context.log_stream_name: str
-  #      Cloudwatch Log stream name
-  # context.memory_limit_in_mb: int
-  #     Function memory
-
-  # Returns
-  # ------
-  # API Gateway Lambda Proxy Output Format: dict
-  #     'statusCode' and 'body' are required
-
-  #     {
-  #         "isBase64Encoded": true | false,
-  #         "statusCode": httpStatusCode,
-  #         "headers": {"headerName": "headerValue", ...},
-  #         "body": "..."
-  #     }
-
-  #     # api-gateway-simple-proxy-for-lambda-output-format
-  #     https: // docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
-
-  begin
-    response = HTTParty.get('http://checkip.amazonaws.com/')
-  rescue HTTParty::Error => error
-    puts error.inspect
-    raise error
+def generate(event:, context:)
+  data = nil
+  number = 0
+  unless event[:queryStringParameters].nil?
+    unless event[:queryStringParameters][:number].nil?
+      number = event[:queryStringParameters][:number]
+    end
   end
 
+  begin
+    data = FizzBuzz.generate(number.to_i)
+  rescue HTTParty::Error => error
+    puts "Application error occurred: #{error.inspect}"
+    create_response(500, error.inspect)
+  end
+
+  puts "Application execute with params: #{number}"
+  create_response(200, data)
+end
+
+def iterate(event:, context:)
+  data = nil
+  params = { Item: event[:body] }
+
+  begin
+    count = params[:Item][:count]
+    data = FizzBuzz.iterate(count.to_i)
+  rescue HTTParty::Error => error
+    puts "Application error occurred: #{error.inspect}"
+    create_response(500, error.inspect)
+  end
+
+  puts "Application execute with params: #{params[:Item]}"
+  create_response(200, data)
+end
+
+private
+
+def create_response(status_code, data)
   {
-    statusCode: response.code,
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    },
-    body: {
-      message: 'Hello Ruby lambda world!',
-      location: response.body
-    }.to_json
+      statusCode: status_code,
+      headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+      },
+      body: data
   }
 end
