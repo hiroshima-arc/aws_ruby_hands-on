@@ -75,6 +75,8 @@ GEM
       spoon (~> 0.0)
     public_suffix (3.0.3)
     rack (2.0.6)
+    rack-contrib (2.1.0)
+      rack (~> 2.0)
     rack-protection (2.0.4)
       rack
     rack-test (1.1.0)
@@ -160,9 +162,11 @@ DEPENDENCIES
   bcrypt
   capybara
   database_cleaner!
+  json
   mocha
   pry
   rack
+  rack-contrib
   rack-test
   rake
   require_all

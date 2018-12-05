@@ -110,6 +110,9 @@ namespace :sam do
     desc 'アプリケーションパッケージバンドル'
     task :vendor do
       cd CLI_DIR do
+        FileUtils.rm_rf('vendor/')
+        sh 'bundle install'
+        sh 'bundle install --deployment'
         FileUtils.rm_rf('services/hello_world/vendor/')
         sh 'cd services ; bundle install'
         sh 'cd services ; bundle install --deployment --path hello_world/vendor/bundle'
