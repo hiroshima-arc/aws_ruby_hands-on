@@ -1,0 +1,8 @@
+ENV["SINATRA_ENV"] ||= "development"
+
+require_relative './config/environment'
+require 'sinatra/activerecord/rake'
+
+load '../../ops/lib/tasks/config.rake'
+load '../../ops/lib/tasks/test.rake'
+load '../../ops/lib/tasks/sam.rake'

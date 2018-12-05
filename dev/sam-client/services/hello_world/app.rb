@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'httparty'
 require 'json'
 
@@ -72,12 +74,12 @@ def lambda_handler(event:, context:)
     puts error.inspect
     raise error
   end
-        		
-  return {
-    :statusCode => response.code,
-    :body => {
-      :message => "Hello World!",
-      :location => response.body
+
+  {
+    statusCode: response.code,
+    body: {
+      message: 'Hello World!',
+      location: response.body
     }.to_json
   }
 end

@@ -1,6 +1,6 @@
 namespace :sam do
   namespace :app do
-    APP_DIR = 'dev/sam-app'.freeze
+    APP_DIR = "#{WORK}/dev/sam-app".freeze
 
     namespace :local do
       desc 'ローカルサーバー実行'
@@ -79,7 +79,7 @@ namespace :sam do
   end
 
   namespace :client do
-    CLI_DIR = 'dev/sam-client'.freeze
+    CLI_DIR = "#{WORK}/dev/sam-client".freeze
 
     namespace :local do
       desc 'ローカルサーバー実行'
@@ -94,7 +94,7 @@ namespace :sam do
       namespace :hellow_world do
         task :hello do
           cd CLI_DIR do
-            sh 'sam local invoke HelloWorldFunction --event tests/hello_world/event_file.json'
+            sh 'sam local invoke HelloWorldFunction --event services/tests/hello_world/event_file.json'
           end
         end
       end
@@ -110,9 +110,9 @@ namespace :sam do
     desc 'アプリケーションパッケージバンドル'
     task :vendor do
       cd CLI_DIR do
-        FileUtils.rm_rf('hello_world/vendor/')
-        sh 'bundle install'
-        sh 'bundle install --deployment --path hello_world/vendor/bundle'
+        FileUtils.rm_rf('services/hello_world/vendor/')
+        sh 'cd services ; bundle install'
+        sh 'cd services ; bundle install --deployment --path hello_world/vendor/bundle'
       end
     end
 

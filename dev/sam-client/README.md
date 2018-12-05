@@ -1,169 +1,156 @@
-# sam-client
+![Corneal](http://thebrianemory.github.io/corneal/images/corneal-small.png)
 
-This is a sample template for sam-client - Below is a brief explanation of what we have generated for you:
+## Why this exists
 
-```bash
-.
-├── README.md                   <-- This instructions file
-├── hello_world                 <-- Source code for a lambda function
-│   ├── app.rb                  <-- Lambda function code
-├── Gemfile                     <-- Ruby dependencies
-├── template.yaml               <-- SAM template
-└── tests                       <-- Unit tests
-    └── unit
-        └── test_handler.rb
+When I was creating my first major Sinatra project, [Cook This Way](https://github.com/thebrianemory/cook-this-way), while doing [Learn Verified](https://learn.co/with/thebrianemory), I was looking for a way to build a Sinatra skeleton similar to running
+
+    rails new APP-NAME
+
+[Hazel](https://github.com/c7/hazel) was the closest thing I could find and this gem is based largely off of it. While it did provide a pretty good initial setup, I still had to tweak some things. The views were sitting in the root directory while I wanted them to reside in an app folder along with my models and controllers. There was also no environment.rb in the config folder as I had become accustom to having.
+
+I also wanted to create a gem for future Learn students so they could easily get started building their projects. Although built with them in mind, this can get you off and running with any Sinatra app.
+
+Install the gem, run `corneal new APP-NAME`, run `bundle install`, and you're all set! You can start up your server with `shotgun` and verify everything is working. It is as simple as that.
+
+It uses a file structure similar to what you would see with Rails.
+
+Directory structure:
+
+```
+├── config.ru
+├── Gemfile
+├── Gemfile.lock
+├── Rakefile
+├── README
+├── app
+│   ├── controllers
+│   │   └── application_controller.rb
+│   ├── models
+│   └── views
+│       ├── layout.erb
+│       └── welcome.erb
+├── config
+│   ├── initializers
+│   └── environment.rb
+├── db
+│   └── migrate
+├── lib
+│   └── .gitkeep
+└── public
+|   ├── images
+|   ├── javascripts
+|   └── stylesheets
+|       └── main.css
+└── spec
+    ├── application_controller_spec.rb
+    └── spec_helper.rb
 ```
 
-## Requirements
+## Installation
 
-* AWS CLI already configured with at least PowerUser permission
-* [Ruby](https://www.ruby-lang.org/en/documentation/installation/) 2.5 installed
-* [Docker installed](https://www.docker.com/community-edition)
-* [Ruby Version Manager](http://rvm.io/)
+    gem install corneal
 
-## Setup process
+## Commands
 
-### Match ruby version with docker image
-For high fidelity development environment, make sure the local ruby version matches that of the docker image. To do so lets use [Ruby Version Manager](http://rvm.io/)
-
-Setup Ruby Version Manager from [Ruby Version Manager](http://rvm.io/)
-
-Run following commands
-
-```bash
-rvm install ruby-2.5.0
-rvm use ruby-2.5.0
-rvm --default use 2.5.0
+```
+corneal -v              # Show Corneal version number
+corneal help [COMMAND]  # Describe available commands or one specific command
+corneal new APP-NAME    # Creates a new Sinatra application
+corneal model NAME      # Generate a model
+corneal controller NAME # Generate a controller
+corneal scaffold NAME   # Generate a model with its associated views and controllers
 ```
 
+The controller generator also have an optional views flag `--no-views` to create controllers without views.
 
-### Installing dependencies
+## Using Corneal
 
-```sam-app``` comes with a Gemfile that defines the requirements and manages installing them.
+To generate your app:
 
-```bash
-gem install bundler
-bundle install
-bundle install --deployment --path hello_world/vendor/bundle
+    corneal new APP-NAME
+
+After Corneal is done generating your app, run `bundle install` from your app's directory:
+
+    cd APP-NAME
+    bundle install
+
+You can then start your server with `shotgun`:
+
+    shotgun
+
+You can generate a model and migration file:
+
+    corneal model NAME
+
+You can also generate an entire MVC structure complete with a migration file:
+
+    corneal scaffold NAME
+
+The resulting structure will look like this:
+
+```
+└─app
+  ├── controllers
+  │   ├──application_controller.rb
+  │   └──new_model_controller.rb
+  ├── models
+  │   └──new_model.rb
+  └── views
+      ├──new_models
+      │  ├──index.html.rb.erb
+      │  ├──show.html.rb.erb
+      │  ├──new.html.rb.erb
+      │  └──edit.html.rb.erb
+      ├── layout.erb
+      └── welcome.erb
 ```
 
-* Step 1 installs ```bundler```which provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed.
-* Step 2 creates a Gemfile.lock that locks down the versions and creates the full dependency closure.
-* Step 3 installs the gems to ```hello_world/vendor/bundle```.
+You can also add your model attributes when you generate the scaffold structure and have them added to your migration file:
 
-**NOTE:** As you change your dependencies during development you'll need to make sure these steps are repeated in order to execute your Lambda and/or API Gateway locally.
+    corneal [model/scaffold] NAME name:string age:integer
 
-### Local development
+```
+class CreateUsers < ActiveRecord::Migration
+  def change
+    create_table :users do |t|
+      t.string :name
+      t.age :integer
 
-**Invoking function locally through local API Gateway**
-
-```bash
-sam local start-api
+      t.timestamps null: false
+    end
+  end
+end
 ```
 
-If the previous command ran successfully you should now be able to hit the following local endpoint to invoke your function `http://localhost:3000/hello`
+Visit [http://localhost:9393/](http://localhost:9393/) to verify your app is running.
 
-**SAM CLI** is used to emulate both Lambda and API Gateway locally and uses our `template.yaml` to understand how to bootstrap this environment (runtime, where the source code is, etc.) - The following excerpt is what the CLI will read in order to initialize an API and its routes:
+You can also verify it is working by running `rspec` to see the passing test:
 
-```yaml
-...
-Events:
-    HelloWorld:
-        Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-        Properties:
-            Path: /hello
-            Method: get
-```
+    1 example, 0 failures
 
-## Packaging and deployment
+## Contributing
 
-AWS Lambda Ruby runtime requires a flat folder with all dependencies including the application. SAM will use `CodeUri` property to know where to look up for both application and dependencies:
+Bug reports and pull requests are welcome on GitHub at https://github.com/thebrianemory/corneal This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-```yaml
-...
-    HelloWorldFunction:
-        Type: AWS::Serverless::Function
-        Properties:
-            CodeUri: hello_world/
-            ...
-```
+## License
 
-Firstly, we need a `S3 bucket` where we can upload our Lambda functions packaged as ZIP before we deploy anything - If you don't have a S3 bucket to store code artifacts then this is a good time to create one:
+    Copyright (c) 2016 Brian Emory
 
-```bash
-aws s3 mb s3://BUCKET_NAME
-```
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
 
-Next, run the following command to package our Lambda function to S3:
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
 
-```bash
-sam package \
-    --template-file template.yaml \
-    --output-template-file packaged.yaml \
-    --s3-bucket REPLACE_THIS_WITH_YOUR_S3_BUCKET_NAME
-```
-
-Next, the following command will create a Cloudformation Stack and deploy your SAM resources.
-
-```bash
-sam deploy \
-    --template-file packaged.yaml \
-    --stack-name sam-app \
-    --capabilities CAPABILITY_IAM
-```
-
-> **See [Serverless Application Model (SAM) HOWTO Guide](https://github.com/awslabs/serverless-application-model/blob/master/HOWTO.md) for more details in how to get started.**
-
-After deployment is complete you can run the following command to retrieve the API Gateway Endpoint URL:
-
-```bash
-aws cloudformation describe-stacks \
-    --stack-name sam-app \
-    --query 'Stacks[].Outputs'
-``` 
-
-## Testing
-
-We use [Mocha](http://gofreerange.com/mocha/docs) for testing our code and you can install it using gem: ``gem install mocha`` 
-
-Next, we run our initial unit tests:
-
-```bash
-ruby tests/unit/test_hello.rb
-```
-
-**NOTE**: It is recommended to use a Ruby Version Manager to manage, and work with multiple ruby environments from interpreters to sets of gems
-# Appendix
-
-## AWS CLI commands
-
-AWS CLI commands to package, deploy and describe outputs defined within the cloudformation stack:
-
-```bash
-sam package \
-    --template-file template.yaml \
-    --output-template-file packaged.yaml \
-    --s3-bucket REPLACE_THIS_WITH_YOUR_S3_BUCKET_NAME
-
-sam deploy \
-    --template-file packaged.yaml \
-    --stack-name sam-app \
-    --capabilities CAPABILITY_IAM \
-    --parameter-overrides MyParameterSample=MySampleValue
-
-aws cloudformation describe-stacks \
-    --stack-name sam-app --query 'Stacks[].Outputs'
-```
-
-## Bringing to the next level
-
-Here are a few ideas that you can use to get more acquainted as to how this overall process works:
-
-* Create an additional API resource (e.g. /hello/{proxy+}) and return the name requested through this new path
-* Update unit test to capture that
-* Package & Deploy
-
-Next, you can use the following resources to know more about beyond hello world samples and how others structure their Serverless applications:
-
-* [AWS Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/)
-
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+    LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
