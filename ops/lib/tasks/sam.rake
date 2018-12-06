@@ -1,6 +1,8 @@
 namespace :sam do
   namespace :app do
     APP_DIR = "#{WORK}/dev/sam-app".freeze
+    APP_S3_BUCKET = 'ruby-hands-on'
+    APP_STACK_NAME  = 'ruby-hands-on-development'
 
     namespace :local do
       desc 'ローカルサーバー実行'
@@ -47,39 +49,50 @@ namespace :sam do
       cd APP_DIR do
         FileUtils.rm_rf('hello_world/vendor/')
         FileUtils.rm_rf('fizz_buzz/vendor/')
-        sh 'bundle install'
-        sh 'bundle install --deployment --path hello_world/vendor/bundle'
-        sh 'bundle install --deployment --path fizz_buzz/vendor/bundle'
+        sh 'bundle install --path hello_world/vendor/bundle'
+        sh 'bundle install --path fizz_buzz/vendor/bundle'
       end
     end
 
     desc 'パッケージ'
     task :package do
       cd APP_DIR do
-        sh 'sam package --template-file template.yaml --s3-bucket ruby-hands-on --output-template-file packaged.yaml'
+        sh "sam package --template-file template.yaml --s3-bucket #{APP_S3_BUCKET} --output-template-file packaged.yaml"
       end
     end
 
     desc 'デプロイ'
     task :deploy do
       cd APP_DIR do
-        sh 'sam deploy --template-file packaged.yaml --stack-name ruby-hands-on-development --capabilities CAPABILITY_IAM'
+        sh "sam deploy --template-file packaged.yaml --stack-name #{APP_STACK_NAME} --capabilities CAPABILITY_IAM"
       end
     end
 
     desc '確認'
     task :check do
       cd APP_DIR do
-        sh "aws cloudformation describe-stacks --stack-name ruby-hands-on-development --query 'Stacks[].Outputs[1]'"
+        sh "aws cloudformation describe-stacks --stack-name #{APP_STACK_NAME} --query 'Stacks[].Outputs[1]'"
+      end
+    end
+
+    desc '削除'
+    task :destroy do
+      cd APP_DIR do
+        sh "aws cloudformation delete-stack --stack-name #{APP_STACK_NAME}"
       end
     end
 
     desc 'リリース'
-    task release: %i[vendor validate package deploy check]
+    task release: %i[validate package deploy check]
+
+    desc 'クリーンリリース'
+    task clean_release: %i[vendor validate package deploy check]
   end
 
   namespace :client do
     CLI_DIR = "#{WORK}/dev/sam-client".freeze
+    CLI_S3_BUCKET = 'ruby-hands-on'
+    CLI_STACK_NAME  = 'ruby-hands-on-client-development'
 
     namespace :local do
       desc 'ローカルサーバー実行'
@@ -111,11 +124,9 @@ namespace :sam do
     task :vendor do
       cd CLI_DIR do
         FileUtils.rm_rf('vendor/')
-        sh 'bundle install'
-        sh 'bundle install --deployment'
+        sh 'bundle install --path vendor/bundle'
         FileUtils.rm_rf('services/hello_world/vendor/')
-        sh 'cd services ; bundle install'
-        sh 'cd services ; bundle install --deployment --path hello_world/vendor/bundle'
+        sh 'cd services ; bundle install --path hello_world/vendor/bundle'
         sh 'npx webpack --mode=production'
       end
     end
@@ -123,25 +134,35 @@ namespace :sam do
     desc 'パッケージ'
     task :package do
       cd CLI_DIR do
-        sh 'sam package --template-file template.yaml --s3-bucket ruby-hands-on --output-template-file packaged.yaml'
+        sh "sam package --template-file template.yaml --s3-bucket #{CLI_S3_BUCKET} --output-template-file packaged.yaml"
       end
     end
 
     desc 'デプロイ'
     task :deploy do
       cd CLI_DIR do
-        sh 'sam deploy --template-file packaged.yaml --stack-name ruby-hands-on-development --capabilities CAPABILITY_IAM'
+        sh "sam deploy --template-file packaged.yaml --stack-name #{CLI_STACK_NAME} --capabilities CAPABILITY_IAM"
       end
     end
 
     desc '確認'
     task :check do
       cd CLI_DIR do
-        sh "aws cloudformation describe-stacks --stack-name ruby-hands-on-development --query 'Stacks[].Outputs[1]'"
+        sh "aws cloudformation describe-stacks --stack-name #{CLI_STACK_NAME} --query 'Stacks[].Outputs[1]'"
+      end
+    end
+
+    desc '削除'
+    task :destroy do
+      cd CLI_DIR do
+        sh "aws cloudformation delete-stack --stack-name #{CLI_STACK_NAME}"
       end
     end
 
     desc 'リリース'
     task release: %i[validate package deploy check]
+
+    desc 'クリーンリリース'
+    task clean_release: %i[vendor validate package deploy check]
   end
 end
