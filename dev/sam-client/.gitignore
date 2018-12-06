@@ -249,3 +249,8 @@ coverage
 packaged.yaml
 
 *.sqlite
+
+node_modules
+public
+
+.sass-cache

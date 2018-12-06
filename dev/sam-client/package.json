@@ -1,0 +1,28 @@
+{
+  "name": "ruby-hands-on",
+  "version": "1.0.0",
+  "description": "Ruby Hands-on Client Example",
+  "dependencies": {
+    "aws-amplify": "^1.1.12"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.1",
+    "file-loader": "^2.0.0",
+    "node-sass": "^4.10.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.5"
+  },
+  "config": {
+    "s3BucketName": "ruby-hands-on",
+    "region": "us-east-1"
+  },
+  "scripts": {
+    "start": "webpack && webpack-dev-server --mode development",
+    "build": "webpack"
+  }
+}

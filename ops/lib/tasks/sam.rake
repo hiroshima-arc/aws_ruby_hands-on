@@ -116,6 +116,7 @@ namespace :sam do
         FileUtils.rm_rf('services/hello_world/vendor/')
         sh 'cd services ; bundle install'
         sh 'cd services ; bundle install --deployment --path hello_world/vendor/bundle'
+        sh 'npx webpack --mode=production'
       end
     end
 
@@ -141,6 +142,6 @@ namespace :sam do
     end
 
     desc 'リリース'
-    task release: %i[vendor validate package deploy check]
+    task release: %i[validate package deploy check]
   end
 end

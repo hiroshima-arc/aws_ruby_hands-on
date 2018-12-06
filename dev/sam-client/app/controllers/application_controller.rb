@@ -8,7 +8,14 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
+    @bundle_url = get_bundle_url
     erb :welcome
+  end
+
+  helpers do
+    def get_bundle_url
+      "main.bundle.js"
+    end
   end
 
 end

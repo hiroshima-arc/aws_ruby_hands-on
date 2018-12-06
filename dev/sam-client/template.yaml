@@ -33,6 +33,9 @@ Resources:
       Properties:
         Handler: lambda.handler
         Runtime: ruby2.5
+        Environment:
+          Variables:
+            RACK_ENV: production
         CodeUri: "./"
         MemorySize: 512
         Timeout: 30
@@ -84,7 +87,7 @@ Outputs:
 
     HelloWorldApi:
       Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/hello/"
 
     HelloWorldFunction:
       Description: "Hello World Lambda Function ARN"
