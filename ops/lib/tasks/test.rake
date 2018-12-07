@@ -30,15 +30,15 @@ namespace :test do
     desc 'コードチェック'
     task :lint do
       cd CLI_TEST_DIR do
-        sh "rubocop -a services/hello_world/app.rb"
-        sh "rubocop -a services/tests/unit/test_handler.rb"
+        sh "rubocop -a api/hello_world/app.rb"
+        sh "rubocop -a api/tests/unit/test_handler.rb"
       end
     end
 
     desc 'ユニットテスト'
     task :unit do
       cd CLI_TEST_DIR do
-        sh "ruby services/tests/unit/test_*.rb"
+        sh "ruby api/tests/unit/test_*.rb"
       end
     end
 

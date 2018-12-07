@@ -10,14 +10,14 @@ phases:
       - cd dev/sam-app ; ruby tests/unit/**/test_*.rb
       - cd dev/sam-app ; ruby tests/unit/**/*_test.rb
       - cd dev/sam-client ; bundle exec rspec
-      - cd dev/sam-client ; ruby services/tests/**/test_*.rb
+      - cd dev/sam-client ; ruby api/tests/**/test_*.rb
   build:
     commands:
       - bundle install --deployment --without test development
       - cp -r ./vendor dev/sam-app/hello_world
       - cp -r ./vendor dev/sam-app/fizz_buzz
       - cp -r ./vendor dev/sam-client
-      - cp -r ./vendor dev/sam-client/services/hello_world
+      - cp -r ./vendor dev/sam-client/api/hello_world
       - rm -rf ./vendor
       - cd dev/sam-client ; npm install
       - cd dev/sam-client ; npm rebuild node-sass
