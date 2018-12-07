@@ -107,7 +107,7 @@ namespace :sam do
       namespace :hellow_world do
         task :hello do
           cd CLI_DIR do
-            sh 'sam local invoke HelloWorldFunction --event services/tests/hello_world/event_file.json'
+            sh 'sam local invoke HelloWorldFunction --event api/tests/hello_world/event_file.json'
           end
         end
       end
@@ -125,8 +125,8 @@ namespace :sam do
       cd CLI_DIR do
         FileUtils.rm_rf('vendor/')
         sh 'bundle install --path vendor/bundle'
-        FileUtils.rm_rf('services/hello_world/vendor/')
-        sh 'cd services ; bundle install --path hello_world/vendor/bundle'
+        FileUtils.rm_rf('api/hello_world/vendor/')
+        sh 'cd api ; bundle install --path hello_world/vendor/bundle'
         sh 'npx webpack --mode=production'
       end
     end
