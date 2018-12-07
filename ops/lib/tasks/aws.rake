@@ -1,10 +1,24 @@
 namespace :aws do
-  BUILD_SH = './ops/aws/code_build/aws-codebuild-docker-images/local_builds/codebuild_build.sh'
+  namespace :code_pipeline do
+    desc 'パイプライン作成'
+    task :build do
+      cd "#{WORK}/ops/aws/code_pipeline" do
+        sh "./create_stack.sh"
+      end
+    end
 
-  namespace :code_build do
-    desc 'CodeBiuldローカル実行'
-    task :local do
-      sh "#{BUILD_SH} -i aws/codebuild/ruby:2.5.1 -a ./ops/aws/code_build/artifact"
+    desc 'パイプライン更新'
+    task :update do
+      cd "#{WORK}/ops/aws/code_pipeline" do
+        sh "./update_stack.sh"
+      end
+    end
+
+    desc 'パイプライン削除'
+    task :destroy do
+      cd "#{WORK}/ops/aws/code_pipeline" do
+        sh "./destroy_stack.sh"
+      end
     end
   end
 end

@@ -1,0 +1,9 @@
+version: '3'
+services:
+  repo:
+    image: aws-ruby-hands-on
+    build:
+      context: ops/docker/repo
+    volumes:
+      - .:/repo
+    working_dir: "/repo"

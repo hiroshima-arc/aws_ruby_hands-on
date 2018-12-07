@@ -3,6 +3,7 @@ phases:
   install:
     commands:
       - bundle install
+      - cd dev/sam-client ; bundle install
   pre_build:
     commands:
       - cd dev/sam-app ; ruby tests/unit/*.rb
@@ -18,6 +19,9 @@ phases:
       - cp -r ./vendor dev/sam-client
       - cp -r ./vendor dev/sam-client/services/hello_world
       - rm -rf ./vendor
+      - cd dev/sam-client ; npm install
+      - cd dev/sam-client ; npm rebuild node-sass
+      - cd dev/sam-client ; npm run build
   post_build:
     commands:
       # env var BUILD_ARTIFACT_BUCKET is defined in ci.yaml
