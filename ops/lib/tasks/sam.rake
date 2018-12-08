@@ -141,7 +141,7 @@ namespace :sam do
     desc 'デプロイ'
     task :deploy do
       cd CLI_DIR do
-        sh "sam deploy --template-file packaged.yaml --stack-name #{CLI_STACK_NAME} --capabilities CAPABILITY_IAM"
+        sh "sam deploy --template-file packaged.yaml --stack-name #{CLI_STACK_NAME} --capabilities CAPABILITY_IAM  --parameter-overrides API=#{ENV['DEV_API']}"
       end
     end
 
@@ -185,7 +185,7 @@ namespace :sam do
 
     task :deploy do
       cd STG_DIR do
-        sh "sam deploy --template-file packaged.yaml --stack-name #{STG_STACK_NAME} --capabilities CAPABILITY_IAM"
+        sh "sam deploy --template-file packaged.yaml --stack-name #{STG_STACK_NAME} --capabilities CAPABILITY_IAM  --parameter-overrides API=#{ENV['PRD_API']}"
       end
     end
 

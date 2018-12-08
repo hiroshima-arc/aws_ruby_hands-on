@@ -2,6 +2,7 @@ const MODE = 'development';
 const webpack = require('webpack');
 const path = require('path');
 const enabledSourceMap = (MODE === 'development');
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
   mode: MODE,
@@ -52,6 +53,7 @@ module.exports = {
     hot: true
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new CleanWebpackPlugin(['public']),
   ]
 };

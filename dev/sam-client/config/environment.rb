@@ -1,5 +1,9 @@
-unless ENV['SINATRA_ENV'] == 'lambda'
+if ENV['SINATRA_ENV'] == 'lambda'
+  require 'httparty'
+  require 'json'
+else
   ENV['SINATRA_ENV'] ||= "development"
+  ENV['API_URL'] ||= 'http://127.0.0.1:9393/api'
 
   require 'bundler/setup'
   Bundler.require(:default, ENV['SINATRA_ENV'])

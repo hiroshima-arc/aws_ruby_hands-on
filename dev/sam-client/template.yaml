@@ -10,6 +10,23 @@ Globals:
     Function:
         Timeout: 3
 
+    Api:
+      # enable CORS; to make more specific, change the origin wildcard
+      # to a particular domain name, e.g. "'www.example.com'"
+      Cors:
+        AllowMethods: "'*'"
+        AllowHeaders: "'*'"
+        AllowOrigin: "'*'"
+
+Parameters:
+  ENV:
+    Type: String
+    Default: "development"
+    Description: Target Environment
+  API:
+    Type: String
+    Default: "http://127.0.0.1:3000/api"
+    Description: API URL
 
 Resources:
 
@@ -35,7 +52,8 @@ Resources:
         Runtime: ruby2.5
         Environment:
           Variables:
-            RACK_ENV: development
+            RACK_ENV: !Ref ENV
+            API_URL: !Ref API
         CodeUri: "./"
         MemorySize: 512
         Timeout: 30

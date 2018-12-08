@@ -10,7 +10,7 @@
     <title>SamClient/</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <script src=<%= @bundle_url %>></script>
   </head>
   <body>
     <div class="wrapper">
@@ -22,7 +22,10 @@
       </footer>
     </div>
     <script src=<%= @bundle_url %>></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+    </script>
     <!--[if lt IE 7]>
       <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
       <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
