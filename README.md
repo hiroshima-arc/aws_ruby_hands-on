@@ -326,3 +326,5 @@ rubocop -a dev/sam-app/tests/unit/test_handler.rb
 - [SimpleCov](https://github.com/colszowka/simplecov)
 - [RuboCop](https://github.com/rubocop-hq/rubocop)
 - [AWS CodeBuild curated Docker images](https://github.com/aws/aws-codebuild-docker-images)
+- [Running Ruby Sinatra on AWS Lambda](https://github.com/aws-samples/serverless-sinatra-sample)
+- [Corneal](https://github.com/thebrianemory/corneal)
