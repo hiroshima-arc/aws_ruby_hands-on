@@ -16,7 +16,7 @@ gem 'rack'
 gem 'rack-contrib'
 gem "httparty"
 gem "rake"
-
+gem 'aws-record'
 
 group :test do
   gem 'rspec'
