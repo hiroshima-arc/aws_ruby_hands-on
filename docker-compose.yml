@@ -7,3 +7,13 @@ services:
     volumes:
       - .:/repo
     working_dir: "/repo"
+  dynamodb:
+    image: instructure/dynamo-local-admin
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/dynamodb_local_data
+
+volumes:
+  dynamodb_local_data:
+    driver: local
