@@ -1,22 +1,22 @@
-import { getApiUrl } from './utilles'
-
+import {getApiUrl} from './utilles'
 import $ from 'jquery'
-$(function () {
-  $("#hello_button").click(function (e) {
+
+$(() => {
+  $("#hello_button").click((e) => {
     e.preventDefault();
-    $("#message").html("Now loading...");
+    $("#message_ajax").html("Now loading...");
 
     $.ajax({
       url: getApiUrl('hello'),
       type: "GET",
-      success : function(callback){
+      success: function (callback) {
       },
-      error : function(){
+      error: function () {
         alert("Error to save data");
       }
     })
-      .done(function(json) {
-        $("#message").html(json['message']);
+      .done(function (json) {
+        $("#message_ajax").html(json['message']);
       });
   })
 });
