@@ -5,17 +5,13 @@ namespace :sam do
     APP_STACK_NAME  = 'ruby-hands-on-development'
 
     namespace :local do
-      desc 'ローカルサーバー実行'
-      task :api do
+      desc 'ローカルサーバー実行(env:環境変数オプション db:DB接続オプション)'
+      task :api, [:env, :db] do |_t, arg|
+        comd = "sam local start-api --host 0.0.0.0"
+        comd += " --env-vars #{APP_DIR}/.env.json" unless arg.env.nil?
+        comd += " --docker-network #{LOCAL_NETWORK}" unless  arg.db.nil?
         cd APP_DIR do
-          sh 'sam local start-api --host 0.0.0.0'
-        end
-      end
-
-      desc 'ローカルサーバー実行(DynamoDB接続)'
-      task :api_db do
-        cd APP_DIR do
-          sh "sam local start-api --host 0.0.0.0  --docker-network #{LOCAL_NETWORK}"
+          sh comd
         end
       end
 
@@ -103,9 +99,12 @@ namespace :sam do
 
     namespace :local do
       desc 'ローカルサーバー実行'
-      task :api do
+      task :api, [:env, :db] do |_t, arg|
+        comd = "sam local start-api --host 0.0.0.0"
+        comd += " --env-vars #{CLI_DIR}/.env.json" unless arg.env.nil?
+        comd += " --docker-network #{LOCAL_NETWORK}" unless  arg.db.nil?
         cd CLI_DIR do
-          sh 'sam local start-api --host 0.0.0.0'
+          sh comd
         end
       end
 

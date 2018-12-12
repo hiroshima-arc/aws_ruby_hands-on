@@ -54,4 +54,5 @@ build-iPhoneSimulator/
 .gradle
 .asciidoctor
 .env
+dev/sam-client/.env.json
 packaged.yaml

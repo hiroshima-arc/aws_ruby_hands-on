@@ -247,3 +247,5 @@ vendor
 .bundle
 coverage
 packaged.yaml
+.env
+.env.json
