@@ -61,7 +61,7 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: './assets',
     overlay: true,
     hot: true
   },
