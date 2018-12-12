@@ -1,9 +1,5 @@
 namespace :sam do
   namespace :app do
-    APP_DIR = "#{WORK}/dev/sam-app".freeze
-    APP_S3_BUCKET = 'ruby-hands-on'
-    APP_STACK_NAME  = 'ruby-hands-on-development'
-
     namespace :local do
       desc 'ローカルサーバー実行(env:環境変数オプション db:DB接続オプション)'
       task :api, [:env, :db] do |_t, arg|
@@ -93,10 +89,6 @@ namespace :sam do
   end
 
   namespace :client do
-    CLI_DIR = "#{WORK}/dev/sam-client".freeze
-    CLI_S3_BUCKET = 'ruby-hands-on'
-    CLI_STACK_NAME  = 'ruby-hands-on-client-development'
-
     namespace :local do
       desc 'ローカルサーバー実行'
       task :api, [:env, :db] do |_t, arg|
