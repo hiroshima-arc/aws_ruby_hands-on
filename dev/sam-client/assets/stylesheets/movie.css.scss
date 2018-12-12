@@ -1,0 +1,65 @@
+.movie-form {
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 13px;
+  font-family: sans-serif;
+}
+
+.movie-form .item {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.movie-form .item.no-label {
+  padding: 5px 0px 5px 60px;
+}
+
+.movie-form .item .label {
+  float: left;
+  padding: 5px;
+  margin: 0;
+}
+
+.movie-form .item input[type=text],
+.movie-form .item textarea {
+  display: block;
+  margin-left: 60px;
+  width: 200px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 13px;
+}
+
+.movie-form .item ::placeholder {
+  color: #ccc;
+}
+
+.movie-form .item textarea {
+  outline: none;
+  border: 1px solid #ccc;
+  resize: vertical;
+}
+
+input[type=submit] {
+  margin-top: 10px;
+  border: none;
+  outline: none;
+  display: block;
+  line-height: 30px;
+  width: 160px;
+  text-align: center;
+  font-size: 13px;
+  color: #fff;
+  background-color: #696;
+  border-bottom: 4px solid #464;
+  cursor: pointer;
+
+  box-sizing: content-box;
+  transition: 0.1s ease all
+}
+
+input[type=submit]:hover {
+  opacity: 0.6;
+}

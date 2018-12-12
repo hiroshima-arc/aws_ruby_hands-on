@@ -5,9 +5,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+    </style>
     <title>AWS Ruby hands-on</title>
 </head>
-<body>
+<body onload="init()">
 <h1>AWS Lambda function Demo</h1>
 <header>
     <nav>
@@ -18,22 +20,67 @@
                     <li id="sub-menu-hello-2"><a href="#">HelloApiCallByAjax</a></li>
                 </ul>
             </li>
+            <li id="menu-movie"><a href="#">Movie</a>
+                <ul id="sub-menu-movie">
+                    <li id="sub-menu-movie-2"><a href="#">CreateMovieApiCallByAjax</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 </header>
 <section>
-    <article>
-        <div id="hello-component">
-            <h1>Hello</h1>
-            <article id="art-2">
-                <h1>HelloApiCallByAjax</h1>
-                <p id="message_ajax">
-                    Ready...
-                <p>
-                    <input type="submit" value="実行" id="hello_button">
-            </article>
-        </div>
-    </article>
+    <div id="hello-component">
+        <h1>Hello</h1>
+        <article id="art-2">
+            <h1>HelloApiCallByAjax</h1>
+            <p id="message_ajax">
+                Ready...
+            <p>
+                <input type="submit" value="実行" id="hello_button">
+        </article>
+    </div>
+
+    <div id="movie-component">
+        <h1>Movie</h1>
+        <article id="movie-component__art-1">
+            <h1>CreateMovieApiCallByAjax</h1>
+            <p id="movie-component__art-1__message">
+                Ready...
+            <p>
+            <form class="movie-form" method="post">
+                <fieldset>
+                    <legend>Movie</legend>
+                    <div class="item">
+                        <label class="label" for="movie-component__art-1__input__title">Title</label>
+                        <input id="movie-component__art-1__input__title" type="text" name="title">
+                    </div>
+                    <div class="item">
+                        <label class="label" for="movie-component__art-1__input__year">Year</label>
+                        <input id="movie-component__art-1__input__year" type="text" name="year">
+                    </div>
+                    <fieldset>
+                        <legend>Info</legend>
+                        <div class="item">
+                        <textarea rows="4" id="movie-component__art-1__input__info-plot"
+                                  placeholder="Movie plot"></textarea>
+                        </div>
+                        <div class="item">
+                            <label for="language">Rating：</label>
+                            <select id="movie-component__art-1__select__info-rating" name="info[rating]" required>
+                                <option value="">選択してください</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <input type="submit" value="実行" id="movie-component__art-1__button">
+                </fieldset>
+            </form>
+        </article>
+    </div>
 </section>
 
 <footer>
@@ -41,5 +88,15 @@
 </footer>
 
 <script src=main.bundle.js></script>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+</script>
+<script>
+  var init = () => {
+    document.getElementById('art-2').style.display = "none";
+  }
+</script>
 </body>
 </html>

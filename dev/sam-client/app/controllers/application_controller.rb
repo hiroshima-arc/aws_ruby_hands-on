@@ -39,15 +39,61 @@ class ApplicationController < Sinatra::Base
     { :message => 'Hello World!' }.to_json
   end
 
-  get '/api/movie/new' do
-    movie = Movie.new(
-        year: 2015,
-        title: 'The Big New Movie',
-        info: {
-            plot: 'Nothing happens at all.',
-            rating: 0
-        })
-    movie.save!
+  get "/movie" do
+    @bundle_url = get_bundle_url
+    @movie = 'Ready...'
+    erb :movie
+  end
+
+  post "/movie/new" do
+    @bundle_url = get_bundle_url
+    @params.each { |k,v| redirect '/movie' if v.empty? }
+
+    begin
+      response = HTTParty.post(
+          api_url(service='movie/new'),
+          :body => @params,
+          :header => { 'Content-Type' => 'application/json' }
+      )
+      @movie = JSON.parse(response.body)['message']
+    rescue HTTParty::Error => error
+      puts error.inspect
+      raise error
+    end
+
+    erb :movie
+  end
+
+  post '/api/movie/new' do
+    content_type :json
+    headers 'Access-Control-Allow-Origin' => '*'
+
+    begin
+      year = params[:year]
+      title = params[:title]
+      plot = params[:info][:plot]
+      rating = params[:info][:rating]
+
+      movie = Movie.find(year: year, title: title)
+
+      if movie.nil?
+        movie = Movie.new(
+            year: year,
+            title: title,
+            info: {
+                plot: plot,
+                rating: rating
+            })
+        movie.save!
+
+        { :message => 'Success' }.to_json
+      else
+        { :message => 'There is record' }.to_json
+      end
+    rescue => e
+      puts e.inspect
+      raise e
+    end
   end
 
   get '/api/movie' do

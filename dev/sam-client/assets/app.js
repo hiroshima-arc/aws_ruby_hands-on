@@ -1,3 +1,5 @@
 import './stylesheets/application.css.scss'
+import './stylesheets/movie.css.scss'
 import './javascripts/welcome'
 import './javascripts/hello'
+import './javascripts/movie'
