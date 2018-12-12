@@ -13,6 +13,15 @@ else
       :database => "db/#{ENV['SINATRA_ENV']}.sqlite"
   )
 
+  Aws.config.update({
+                        credentials: Aws::Credentials.new(
+                            ENV["AWS_ACCESS_KEY_ID"],
+                            ENV["AWS_SECRET_ACCESS_KEY"]
+                        )
+                    })
+  Aws.config.update({region: ENV["AWS_DEFAULT_REGION"]})
+  Aws.config.update({endpoint: 'http://localhost:8000'})
+
   require './app/controllers/application_controller'
   require_all 'app'
 end
