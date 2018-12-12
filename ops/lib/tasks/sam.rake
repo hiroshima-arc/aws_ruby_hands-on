@@ -12,6 +12,13 @@ namespace :sam do
         end
       end
 
+      desc 'ローカルサーバー実行(DynamoDB接続)'
+      task :api_db do
+        cd APP_DIR do
+          sh "sam local start-api --host 0.0.0.0  --docker-network #{LOCAL_NETWORK}"
+        end
+      end
+
       desc 'ローカル実行'
       task invoke: %i[hellow_world:hello fizz_buzz:generate fizz_buzz:iterate]
       namespace :hellow_world do
