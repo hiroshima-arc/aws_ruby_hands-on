@@ -19,6 +19,7 @@ gem "tux"
 gem 'json'
 gem 'rack'
 gem 'rack-contrib'
+gem 'aws-record'
 
 
 group :development, :test do

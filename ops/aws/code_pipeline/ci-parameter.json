@@ -29,6 +29,6 @@
   },
   {
     "ParameterKey": "BuildImage",
-    "ParameterValue": "hiroshimaarc/aws-ruby-hands-on:1.0.0"
+    "ParameterValue": "hiroshimaarc/aws-ruby-hands-on:1.1.0"
   }
 ]

@@ -2,7 +2,7 @@ namespace :ci do
   BUILD_SH = './ops/aws/code_build/aws-codebuild-docker-images/local_builds/codebuild_build.sh'
   REPOSITORY = 'hiroshimaarc'
   CI_IMAGE = 'aws-ruby-hands-on'
-  IMAGE_VER = '1.0.0'
+  IMAGE_VER = '1.1.0'
 
   desc 'CIイメージのビルド'
   task :build_image do
@@ -16,7 +16,7 @@ namespace :ci do
 
   desc 'CIイメージのバージョン更新'
   task :update_image, [:ver] => [:build_image] do |_t, args|
-    sh "docker tag re-zero-tdd:latest #{REPOSITORY}/#{CI_IMAGE}:#{args[:ver]}"
+    sh "docker tag #{CI_IMAGE}:latest #{REPOSITORY}/#{CI_IMAGE}:#{args[:ver]}"
   end
 
   desc 'CIイメージのデプロイ'

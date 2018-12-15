@@ -2,8 +2,10 @@ version: 0.1
 phases:
   install:
     commands:
-      - bundle install
+      - cd dynamodb/ ; java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb &
+      - cd dev/ ; bundle install
       - cd dev/sam-client ; bundle install
+      - cd dev/sam-client ; bundle exec rake db:migrate SINATRA_ENV=test
   pre_build:
     commands:
       - cd dev/sam-app ; ruby tests/unit/*.rb
