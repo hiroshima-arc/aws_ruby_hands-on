@@ -12,6 +12,8 @@ if ENV['SINATRA_ENV'] == 'lambda'
 else
   ENV['SINATRA_ENV'] ||= "development"
   ENV['API_URL'] ||= 'http://127.0.0.1:9393/api'
+  ENV["AWS_DEFAULT_REGION"] ||= 'us-east-1'
+  ENV["DB_ENDPOINT"] ||= 'http://localhost:8000'
 
   require 'bundler/setup'
   Bundler.require(:default, ENV['SINATRA_ENV'])
@@ -28,7 +30,7 @@ else
                         )
                     })
   Aws.config.update({region: ENV["AWS_DEFAULT_REGION"]})
-  Aws.config.update({endpoint: 'http://localhost:8000'})
+  Aws.config.update({endpoint: ENV["DB_ENDPOINT"]})
 
   require './app/controllers/application_controller'
   require_all 'app'
