@@ -176,7 +176,7 @@ class ApplicationController < Sinatra::Base
 
   helpers do
     def get_bundle_url
-      "main.bundle.js"
+      "#{ENV['BUNDLE_URL']}/main.bundle.js"
     end
 
     def api_url(service)
