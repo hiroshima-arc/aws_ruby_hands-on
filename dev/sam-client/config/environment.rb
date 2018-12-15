@@ -13,6 +13,8 @@ else
   ENV['SINATRA_ENV'] ||= "development"
   ENV['API_URL'] ||= 'http://127.0.0.1:9393/api'
   ENV["AWS_DEFAULT_REGION"] ||= 'us-east-1'
+  ENV["AWS_ACCESS_KEY_ID"] ||= 'XXXXXXXXXXXXXXXXXXXX'
+  ENV["AWS_SECRET_ACCESS_KEY"] ||= 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
   ENV["DB_ENDPOINT"] ||= 'http://localhost:8000'
 
   require 'bundler/setup'
