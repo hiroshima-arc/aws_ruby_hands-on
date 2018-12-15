@@ -1,7 +1,14 @@
 if ENV['SINATRA_ENV'] == 'lambda'
   require 'httparty'
   require 'json'
+  require 'aws-record'
+  require 'active_record'
+  require 'require_all'
+
   ENV['BUNDLE_URL'] = 'https://s3.amazonaws.com/ruby-hands-on'
+
+  require_all 'app', 'db/migrate'
+  DynamoDB::CreateMovies.migrate
 else
   ENV['SINATRA_ENV'] ||= "development"
   ENV['API_URL'] ||= 'http://127.0.0.1:9393/api'

@@ -55,8 +55,7 @@ Resources:
             RACK_ENV: !Ref ENV
             API_URL: !Ref API
         Policies:
-          - DynamoDBCrudPolicy:
-              TableName: !Ref MovieTable
+          - AmazonDynamoDBFullAccess
         CodeUri: "./"
         MemorySize: 512
         Timeout: 30
@@ -103,16 +102,6 @@ Resources:
         Action: lambda:InvokeFunction
         FunctionName: !Ref SinatraFunction
         Principal: apigateway.amazonaws.com
-    MovieTable:
-      Type: AWS::Serverless::SimpleTable
-      Properties:
-        TableName: MovieServerlessSinatraTable
-        PrimaryKey:
-          Name: id
-          Type: String
-        ProvisionedThroughput:
-          ReadCapacityUnits: 5
-          WriteCapacityUnits: 5
 
 Outputs:
 
