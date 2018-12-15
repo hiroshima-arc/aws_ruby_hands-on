@@ -18,6 +18,16 @@ Globals:
         AllowHeaders: "'*'"
         AllowOrigin: "'*'"
 
+Parameters:
+  ENV:
+    Type: String
+    Default: "production"
+    Description: Target Environment
+  API:
+    Type: String
+    Default: "https://api-hiroshima-arc.org/api"
+    Description: API URL
+
 Resources:
 
     HelloWorldFunction:
@@ -69,7 +79,10 @@ Resources:
         Runtime: ruby2.5
         Environment:
           Variables:
-            RACK_ENV: production
+            RACK_ENV: !Ref ENV
+            API_URL: !Ref API
+        Policies:
+          - AmazonDynamoDBFullAccess
         CodeUri: "./sam-client"
         MemorySize: 512
         Timeout: 30
